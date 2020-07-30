@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link href="//fonts.googleapis.com/css?family=Monoton" rel="stylesheet" media>
+  <link href="//fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" media>
+  <link href="//fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+  <link href="//fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Cousine" rel="stylesheet">
+  <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/office-code-pro" type="text/css"/>
+  <link href="stylesheets/app.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="loader"><span>Open Spotify</span></div>
+  </div>
+</body>
+<script>
+function getHashParams() {
+  var hashParams = {};
+  var e, r = /([^&;=]+)=?([^&;]*)/g,
+  q = window.location.hash.substring(1);
+  while ( e = r.exec(q)) {
+    hashParams[e[1]] = decodeURIComponent(e[2]);
+  }
+  return hashParams;
+}
+
+var params = getHashParams();
+
+</script>
+</html>
