@@ -11,11 +11,14 @@ body{
   overscroll-behavior-y: contain;
 }
 
+.divSpan{
+  display: inline-block;
+}
+
 footer {
-  position: absolute;
+  position: sticky;
   bottom: 0;
   width: 100%;
-  height: 500px;
   background-color: ##A9A9A9;
 }
 
@@ -24,31 +27,6 @@ footer {
   text-align: center;
 }
 
-.loader
-{
-	position: fixed;
-	left: 0px;
-	top: 0px;
-	width: 100%;
-	height: 100%;
-	z-index: 9999;
-	font-size: 15px;
-	background: black;
-	text-align: center;
-	text-transform: uppercase;
-	font-family: 'Cousine', monospace;
-	color: white;
-	padding-top: 27%;
-
-}
-
-.loader span
-{
-	-webkit-animation: pulsate 1.5s ease-out;
-    /*-webkit-animation-iteration-count: infinite; */
-    opacity: 0.0;
-    top: 50%;
-}
 
 @-webkit-keyframes pulsate {
     0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
@@ -59,12 +37,9 @@ footer {
 #player-container {
     margin: 0%;
     z-index: 10000;
-    height: 100vh;
     display: -ms-flexbox;
     bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: inline-block;
     -ms-flex-align: center;
     align-self: flex-start;
     margin-right: 20px;

@@ -1,0 +1,119 @@
+.contentContainer{
+
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.cloudContent{
+  min-height: 100%;
+}
+header
+{
+  display: flex;
+  position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+  color: white;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 1px solid white;
+}
+
+.StreamBar img{
+  filter: invert(100);
+}
+
+.StreamBar{
+  width: 45%;
+  border: 1px solid white;
+}
+
+.NowPlaying{
+  width: 45%;
+  display: flex;
+  align-items: center;
+  border: 1px solid white;
+  background: white;
+  color: black;
+  margin-left:
+
+}
+
+.NowPlaying span{
+white-space: pre-wrap;
+}
+
+.Live{
+  width: 10%;
+  border: 1px solid white;
+  display: flex;
+  align-items: center;
+  background: white;
+  color: black;
+}
+
+.label-wrapper
+{
+  display: inline-block;
+  margin-left: 10%;
+}
+
+
+.circle{
+  height: 8px;
+   width: 8px;
+   background-color: #e81717;
+   border-radius: 50%;
+   display: inline-block;
+   animation: flickerAnimation 2s infinite;
+
+}
+
+@keyframes flickerAnimation {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1
+  }
+
+}
+
+.tagcloud {
+  font-size: 16px;
+  color: white;
+  position: inherit;
+}
+
+.tagcloud--item {
+  padding: 2px 4px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.tagcloud--item:hover {
+  background-color: rgba(0,0,0,.1);
+  border: 1px solid #333;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  opacity: 1 !important;
+  z-index: 100 !important;
+}
+
+.light .tagcloud--item {
+  color: #fff;
+}
+
+.light .tagcloud--item:hover {
+  background-color: rgba(255,255,255,.1);
+  border: 1px solid #fff;
+}

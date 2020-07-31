@@ -10,12 +10,84 @@
   <link href="//fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Cousine" rel="stylesheet">
   <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/office-code-pro" type="text/css"/>
-  <link href="stylesheets/app.css" rel="stylesheet" />
+  <link href="/stylesheets/footer.css" rel="stylesheet" type="text/css"/>
+  <link href="/stylesheets/header.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-  <div class="loader"><span>Open Spotify</span></div>
+  <div class="contentContainer">
+    <header class="header-container">
+      <div class="Live">
+        <div class="label-wrapper">
+          <span>Live Now</span>
+          <span class="circle"></span>
+        </div>
+      </div>
+      <div class="StreamBar">
+        <img src="http://simpleicon.com/wp-content/uploads/play1-64x64.png" alt="" width="32" height="32">
+        <span>After Dark Selections w/ Tobechukwu Onono</span>
+      </div>
+      <div class="NowPlaying">
+      <!-- <img src="http://simpleicon.com/wp-content/uploads/play1-64x64.png" alt="" width="32" height="32"> -->
+        <span>Now Playing: </span>
+        <span class="songName">Iceberg </span>
+        <span>by </span>
+        <span class="artistName">Tweet </span>
+        <img src="https://www.slantmagazine.com/wp-content/uploads/2005/03/itsmeagain.jpg" alt="" width="32" height="32">
+      </div>
+    </header>
+    <div class="cloudContent">
+    </div>
+    <footer>
+      <div id="player-container">
+      <div id="play-button-container">
+        <svg x="0px" y="0px" width="300px" height="300px" viewBox="0 0 300 300" fill="#fff">
+          <defs>
+            <path id="circlePath" d=" M 150, 150 m -60, 0 a 60,60 0 0,1 120,0 a 60,60 0 0,1 -120,0 "></path>
+          </defs>
+          <circle cx="100" cy="100" r="50" fill="none" stroke="none">
+          </circle>
+          <g>
+            <use xlink:href="#circlePath" fill="none"></use>
+            <text fill="red" stroke="#fff">
+              <textPath xlink:href="#circlePath" fill="#fff"> BITTER • CASSAVA </textPath>
+            </text>
+          </g>
+        </svg>
+      </div>
+    </div>
+    </footer>
   </div>
 </body>
+<script src="/javascripts/TagCloud-master/dist/TagCloud.min.js"></script>
+<script type="text/javascript">
+  var myTags = [
+    'Iceberg','Osondu','Ye','Ode To Bear','Junior June','Delta',"3am @ Toni's",
+    'unseen freestyle', 'Adorn', 'Chicago Freestyle',"Don't Touch My Hair", "Incomplete Kisses",
+    'Lay Me Down', 'Special Affair', 'Discipline', 'Warmth', 'Cab Ride', 'Good & Plenty',
+    'Holding Hands In Public', 'John Redcorn', 'Fire & Desire', 'The Root', 'Soul Sista'
+  ];
+
+  var tagCloud = TagCloud('.cloudContent', myTags,{
+
+    // radius in px
+    radius: 900,
+
+    // animation speed
+    // slow, normal, fast
+    maxSpeed: 'slow',
+    initSpeed: 'slowl',
+
+    // 0 = top
+    // 90 = left
+    // 135 = right-bottom
+    direction: 135,
+
+    // interact with cursor move on mouse out
+    keep: true
+
+});
+</script>
+
 <script>
 function getHashParams() {
   var hashParams = {};
