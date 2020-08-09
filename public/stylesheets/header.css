@@ -20,15 +20,22 @@ header
   margin: 0;
   padding: 0;
   border: 1px solid white;
+  text-transform: uppercase;
+  font-family: 'Roboto Mono', monospace;
+
 }
 
-.StreamBar img{
+ .playButton{
   filter: invert(100);
 }
 
 .StreamBar{
   width: 45%;
   border: 1px solid white;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .NowPlaying{
@@ -36,9 +43,10 @@ header
   display: flex;
   align-items: center;
   border: 1px solid white;
-  background: white;
-  color: black;
-  margin-left:
+  color: white;
+  font-weight: bolder;
+  text-transform: uppercase;
+  position: relative;
 
 }
 
@@ -53,6 +61,13 @@ white-space: pre-wrap;
   align-items: center;
   background: white;
   color: black;
+}
+
+.location{
+  position: absolute;
+  right: 0;
+  font-size: 12px;
+  margin-right: 1%;
 }
 
 .label-wrapper

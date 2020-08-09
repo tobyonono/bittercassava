@@ -11,12 +11,15 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "got": "^11.5.1",
+    "http": "0.0.1-security",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "jstransformer": "^1.0.0",
     "morgan": "~1.9.1",
     "pug": "^3.0.0",
     "request": "^2.88.2",
+    "shortid": "^2.2.15",
+    "socket.io": "^2.3.0",
     "spotify-web-api-js": "^1.4.0"
   }
 }
