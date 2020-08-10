@@ -30,7 +30,7 @@ header
 }
 
 .StreamBar{
-  width: 45%;
+  width: 42%;
   border: 1px solid white;
   font-weight: bolder;
   display: flex;
@@ -39,7 +39,7 @@ header
 }
 
 .NowPlaying{
-  width: 45%;
+  width: 42%;
   display: flex;
   align-items: center;
   border: 1px solid white;
@@ -55,7 +55,7 @@ white-space: pre-wrap;
 }
 
 .Live{
-  width: 10%;
+  width: 8%;
   border: 1px solid white;
   display: flex;
   align-items: center;
@@ -63,6 +63,23 @@ white-space: pre-wrap;
   color: black;
 }
 
+.icons{
+  width: 8%;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.imgIcon{
+  width: 33%;
+  border: 1px solid white;
+  height: 100%;
+}
+
+.imgIcon img{
+  filter: invert(100);
+
+}
 .location{
   position: absolute;
   right: 0;
