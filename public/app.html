@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+48<!DOCTYPE html>
 <html>
 <head>
   <title>Example</title>
@@ -9,6 +9,7 @@
   <link href="//fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" media>
   <link href="//fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
   <link href="//fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Cousine" rel="stylesheet">
   <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/office-code-pro" type="text/css"/>
   <link href="/stylesheets/footer.css" rel="stylesheet" type="text/css"/>
@@ -18,6 +19,57 @@
 </head>
 <body>
   <div class="contentContainer">
+    <div class="modal-overlay closed" id="modal-overlay"></div>
+    <div class="modal closed" id="modal">
+      <a class="close-button" href="#" id="close-button">
+        <img class="playButton" src="https://cdn.onlinewebfonts.com/svg/img_211963.png" alt="" width="24" height="24">
+      </a>
+      <div class="modal-guts">
+        <h1>RECENTLY PLAYED</h1>
+        <ol>
+          <li>
+            <img src="https://www.slantmagazine.com/wp-content/uploads/2005/03/itsmeagain.jpg" alt="" width="48" height="48">
+            <div class="metadata">
+              <span>Janet Jackson</span>
+              <span>Warmth</span>
+              <span>Damita Jo</span>
+            </div>
+            <span class="duration">3:12</span>
+          </li>
+          <hr>
+          <li>
+            <img src="https://i.pinimg.com/originals/f7/be/cf/f7becf29e7782f6320d410abb6294e41.jpg" alt="" width="48" height="48">
+            <div class="metadata">
+              <span>Bilal</span>
+              <span>Soul Sista</span>
+              <span>1st Born Second</span>
+            </div>
+            <span class="duration">4:43</span>
+          </li>
+          <hr>
+          <li>
+            <img src="https://upload.wikimedia.org/wikipedia/en/8/8e/ApolloXXI.jpg" alt="" width="48" height="48">
+            <div class="metadata">
+              <span>Steve Lacy</span>
+              <span>Lay Me Down</span>
+              <span>Apollo XXI</span>
+            </div>
+            <span class="duration">3:43</span>
+          </li>
+          <hr>
+          <li>
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/74/Usher_-_Confessions_album_cover.jpg/220px-Usher_-_Confessions_album_cover.jpg" alt="" width="48" height="48">
+            <div class="metadata">
+              <span>Usher</span>
+              <span>Can U Handle It?</span>
+              <span>Confessions</span>
+            </div>
+            <span class="duration">5:13</span>
+          </li>
+          <hr>
+        </ol>
+      </div>
+    </div>
     <div class="video-background">
         <div class="video-foreground">
           <!--<iframe id="backgroundvid" <iframe width="560" height="315" src="/videos/SP.mp4?autoplay=1" frameborder="0"  mute="1" allow="accelerometer; autoplay *; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>></iframe>-->
@@ -121,10 +173,10 @@
       </div>
       <div class="icons">
         <div class="imgIcon">
-          <img src="https://cdn0.iconfinder.com/data/icons/google-material-design-3-0/48/ic_playlist_play_48px-512.png" width="28" height="28">
+          <a href="#" id="openHistory"><img src="https://cdn0.iconfinder.com/data/icons/google-material-design-3-0/48/ic_playlist_play_48px-512.png" width="28" height="28"></a>
         </div>
         <div class="imgIcon">
-          <img src="https://static.thenounproject.com/png/2486983-200.png" width="24" height="24">
+          <a href="#" id="open-button"><img src="https://www.shareicon.net/data/2016/01/06/699048_database_512x512.png" width="24" height="24"></a>
         </div>
         <div class="imgIcon">
           <img src="https://cdn0.iconfinder.com/data/icons/google-material-design-3-0/48/ic_playlist_play_48px-512.png" width="28" height="28">
@@ -186,8 +238,22 @@
 });
 </script>
 
-<script>
+<script type="text/javascript">
+var modal = document.querySelector("#modal");
+var modalOverlay = document.querySelector("#modal-overlay");
+var closeButton = document.querySelector("#close-button");
+var openButton = document.querySelector("#openHistory");
 
+closeButton.addEventListener("click", function() {
+  modal.classList.toggle("closed");
+  modalOverlay.classList.toggle("closed");
+});
+
+openButton.addEventListener("click", function() {
+  modal.classList.toggle("closed");
+  modalOverlay.classList.toggle("closed");
+  openButton.classList.toggle("bright");
+});
 
 </script>
 <script type="text/javascript">
