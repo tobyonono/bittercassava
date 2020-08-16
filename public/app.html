@@ -21,11 +21,13 @@
   <div class="contentContainer">
     <div class="modal-overlay closed" id="modal-overlay"></div>
     <div class="modal closed" id="modal">
+      <div class="headtop">
       <a class="close-button" href="#" id="close-button">
         <img class="playButton" src="https://cdn.onlinewebfonts.com/svg/img_211963.png" alt="" width="24" height="24">
       </a>
+      <h1>RECENTLY PLAYED</h1>
+    </div>
       <div class="modal-guts">
-        <h1>RECENTLY PLAYED</h1>
         <ol>
           <li>
             <img src="https://www.slantmagazine.com/wp-content/uploads/2005/03/itsmeagain.jpg" alt="" width="48" height="48">
@@ -65,6 +67,16 @@
               <span>Confessions</span>
             </div>
             <span class="duration">5:13</span>
+          </li>
+          <hr>
+          <li>
+            <img src="https://f4.bcbits.com/img/a1059592304_10.jpg" alt="" width="48" height="48">
+            <div class="metadata">
+              <span>Nick Hakim</span>
+              <span>Needy Bees</span>
+              <span>Green Twins</span>
+            </div>
+            <span class="duration">3:27</span>
           </li>
           <hr>
         </ol>
@@ -157,13 +169,13 @@
         </div>
       </div>
       <div class="StreamBar">
-        <img class="playButton" src="http://simpleicon.com/wp-content/uploads/play1-64x64.png" alt="" width="32" height="32">
+        <input type="image" id="channel1" class="playButton paused" src="http://simpleicon.com/wp-content/uploads/play1-64x64.png" alt="" width="32" height="32" />
         <span>Channel 1: After Dark Selections w/ Toby</span>
         <span class="location">Dublin</span>
 
       </div>
       <div class="NowPlaying">
-      <img class="playButton" src="http://simpleicon.com/wp-content/uploads/play1-64x64.png" alt="" width="32" height="32">
+      <input type ="image" id="channel2" class="playButton paused" src="http://simpleicon.com/wp-content/uploads/play1-64x64.png" alt="" width="32" height="32" />
         <span>Channel 2: </span>
         <span class="songName">Totems </span>
         <span>w/ </span>
@@ -296,18 +308,37 @@ openButton.addEventListener("click", function() {
   getUserDeviceInfo();
   getUser();
 
-  socket.emit("hello", { message: "hello from client!" });
+  //client socket stuff - joining channels, triggers for spotify api requests etc.
 
-  socket.on("onGetMyName", function(data)
+  function joinChannel(channelNum)
   {
-    console.log("My Name: " + data.name);
-  });
+    socket.emit("join", channelNum)
+  }
 
-  socket.on("onSendMyNameToAllClients", function(data)
+  function leaveChannel(channelNum)
   {
-    console.log("Name of another client: " + data.name);
-  });
+    socket.emit("leave", channelNum)
+  }
 
+  socket.on("tapIn", function(data)
+  {
+    if(isBroadcaster == false)
+    {
+      $.ajax({
+        url: 'https://api.spotify.com/v1/me/player/play',
+        contentType: 'application/json',
+        type: 'PUT',
+        dataType: 'json',
+        headers: {
+          'Authorization': 'Bearer ' + access_token
+        },
+        data: JSON.stringify({"uris":[data.uri], "device_id":deviceID, "position_ms":data.progress, "offset": { "uri":data.uri} }),
+        success: function(response) {
+        }
+      });
+    }
+
+  });
   socket.on("playSong", function(data)
   {
     if(isBroadcaster == false)
@@ -369,7 +400,7 @@ openButton.addEventListener("click", function() {
 
 
 
-  function getBroadcastPlayback()
+  function getBroadcastPlayback(channelNum)
   {
     $.ajax({
       url: 'https://api.spotify.com/v1/me/player',
@@ -389,30 +420,18 @@ openButton.addEventListener("click", function() {
           isPlaying: response.is_playing,
           uri: response.item.uri,
           deviceID: response.device.id,
-          trackID: response.item.id
+          trackID: response.item.id,
+          channel: channelNum
         }
 
         socket.emit("BroadcasterPlayback", playbackJson);
+        console.log(channelNum);
 
       }
 
     });
   }
 
-  function updateJSON(jsonData)
-  {
-    $.ajax({
-      data: JSON.stringify(jsonData),
-      url: '/updateJSON',
-      method: "POST",
-      contentType: "application/json",
-      dataType: 'json',
-      success: function(response)
-      {
-
-      }
-    });
-  }
 
 function getUser()
 {
@@ -422,10 +441,11 @@ function getUser()
       'Authorization': 'Bearer ' + access_token
     },
     success: function(response) {
-      if (response.id === '96pcj22qe7b6uom5ifeia72vb')
+      if (response.id === ('96pcj22qe7b6uom5ifeia72vb' || '1158091471'))
       {
+        var channel = (response.id === '96pcj22qe7b6uom5ifeia72vb') ? 'channel2' : 'channel1';
         isBroadcaster = true;
-        setInterval(getBroadcastPlayback, 1000);
+        setInterval(getBroadcastPlayback, 1000, channel);
       }
       else
       {
@@ -449,12 +469,51 @@ function getUserDeviceInfo()
   });
 }
 
-
-  function sendMyNameToAllClients()
+document.getElementById('channel1').addEventListener('click', function()
+{
+  if($(this).hasClass('paused'))
   {
-    socket.emit("sendMyNameToAllClients");
+    leaveChannel('channel2');
+    joinChannel('channel1');
+    $(this).toggleClass('paused');
+    $('#channel1').attr('src', 'https://simpleicon.com/wp-content/uploads/pause.png');
+    $('#channel2').attr('src', 'http://simpleicon.com/wp-content/uploads/play1-64x64.png');
+    $('#channel2').addClass('paused');
+
   }
 
-  sendMyNameToAllClients();
+  else
+  {
+    leaveChannel('channel1');
+    $(this).toggleClass('paused');
+    $('#channel1').attr('src', 'http://simpleicon.com/wp-content/uploads/play1-64x64.png');
+
+  }
+
+});
+
+document.getElementById('channel2').addEventListener('click', function()
+{
+  if($(this).hasClass('paused'))
+  {
+    leaveChannel('channel1');
+    joinChannel('channel2');
+    $(this).toggleClass('paused');
+    $('#channel2').attr('src', 'https://simpleicon.com/wp-content/uploads/pause.png');
+    $('#channel1').attr('src', 'http://simpleicon.com/wp-content/uploads/play1-64x64.png');
+    $('#channel1').addClass('paused');
+
+  }
+
+  else
+  {
+    leaveChannel('channel2');
+    $(this).toggleClass('paused');
+    $('#channel2').attr('src', 'http://simpleicon.com/wp-content/uploads/play1-64x64.png');
+
+  }
+
+});
+
 </script>
 </html>

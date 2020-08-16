@@ -39,7 +39,8 @@ var uri;
 var deviceID;
 var playbackArray = [];
 var i = 0;
-var playbackJson = {"playback":[]};
+var playbackJson = {"channel1":[], "channel2":[]};
+var latestInfo = {"channel1":[], "channel2":[]};
 
 var jsonPushData = {
   userName: currentUserName,
@@ -186,123 +187,59 @@ app.get('/refresh_token', function(req, res) {
   });
 });
 
-app.get('/isBroadcastingUser', function(req, res)
-{
-  return( req.userID === '1158091471' ? true : false);
-/**
-  if (userID ==='1158091471')
-  {
-    var options = {
-      url: 'https://api.spotify.com/v1/me/player',
-      headers: { 'Authorization': 'Bearer ' + access_token },
-      json: true
-    };
 
-    // use the access token to access the Spotify Web API
-    request.get(options, function(error, response, body) {
-
-    });
-  }
-  **/
-
-
-
-});
-
-/*
-function refreshBroadcaster(refreshToken)
-{
-  var refToken = refreshToken;
-  var authOptions = {
-    url: 'https://accounts.spotify.com/api/token',
-    headers: { 'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')) },
-    form: {
-      grant_type: 'refresh_token',
-      refresh_token: refToken
-    },
-    json: true
-  };
-
-  request.post(authOptions, function(error, response, body) {
-    if (!error && response.statusCode === 200) {
-      broadcastingAccessToken = body.access_token;
-
-    }
-  });
-
-  var options = {
-    url: 'https://api.spotify.com/v1/me/player',
-    headers: { 'Authorization': 'Bearer ' + broadcastingAccessToken },
-    json: true
-  };
-
-  // use the access token to access the Spotify Web API
-  request.get(options, function(error, response, body) {
-
-    playbackJson = {
-      imgsrc: body.item.album.images[0].url,
-      songName: body.item.name,
-      artistName: body.item.artists[0].name,
-      albumName: body.item.album.name,
-      progress: body.progress_ms,
-      songLength: body.timestamp,
-      isPlaying: body.is_playing,
-      uri: body.item.uri,
-      trackID: body.item.id
-    }
-
-    console.log(body);
-
-  });
-}
+/* socket stuff that handles the playback info from the broadcasting clients + publishes
+   them to non broadcasters depending on what room they are in. Also handles joining + leaving rooms
+   which are the channels on the frontend
 */
-
-
-
-//socket stuff to notify client there's a change in playbackInfo
 
 io.sockets.on("connection", function(socket)
 {
-    var clientName = shortid.generate();
-    console.log("client was connected, name = " + clientName);
-
-    socket.on("getMyName", function()
+    socket.on("join", function(data)
     {
-        socket.emit("onGetMyName", { name: clientName });
+      socket.join(data);
+      socket.emit("tapIn", latestInfo[data][0]);
     });
 
-    socket.on("sendMyNameToAllClients", function()
+    socket.on("leave", function(data)
     {
-        socket.broadcast.emit("onSendMyNameToAllClients", { name: clientName });
-        console.log(clientName);
+      socket.emit("pauseSong");
+      socket.leave(data);
+      console.log(playbackJson);
+
     });
+
 
     socket.on("BroadcasterPlayback", function(data)
     {
-      if(playbackJson.playback.length === 0)
+      //need latestInfo for users who join mid song. playbackJson is for comparison to know when to trigger an api call for the user
+      latestInfo[data.channel][0] = data;
+
+      if(playbackJson[data.channel].length === 0)
       {
-        playbackJson.playback.push(data);
-        if(playbackJson.playback[0].isPlaying == true)
+        playbackJson[data.channel].push(data);
+        console.log(playbackJson);
+        if(playbackJson[data.channel][0].isPlaying == true)
         {
-          socket.broadcast.emit("playSong", data);
+          socket.to(data.channel).emit("playSong", data);
         }
       }
-      else if(playbackJson.playback[0].trackID !== data.trackID)
+      else if(playbackJson[data.channel][0].trackID !== data.trackID)
       {
-        socket.broadcast.emit("playSong", data);
-        playbackJson.playback[0] = data;
+        socket.to(data.channel).emit("playSong", data);
+        playbackJson[data.channel][0] = data;
       }
-      else if(playbackJson.playback[0].trackID === data.trackID)
+      else if(playbackJson[data.channel][0].trackID === data.trackID)
       {
-        if((data.isPlaying === true) && (playbackJson.playback[0].isPlaying === false))
+        if((data.isPlaying === true) && (playbackJson[data.channel][0].isPlaying === false))
         {
-          socket.broadcast.emit("resumeSong", data);
-          playbackJson.playback[0] = data;
+          socket.to(data.channel).emit("resumeSong", data);
+          playbackJson[data.channel][0] = data;
         }
-        else if((data.isPlaying === false) && (playbackJson.playback[0].isPlaying === true))
+        else if((data.isPlaying === false) && (playbackJson[data.channel][0].isPlaying === true))
         {
-          socket.broadcast.emit("pauseSong", data);
-          playbackJson.playback[0] = data;
+          socket.to(data.channel).emit("pauseSong", data);
+          playbackJson[data.channel][0] = data;
         }
       }
     });
