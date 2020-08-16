@@ -300,7 +300,13 @@ openButton.addEventListener("click", function() {
       }
     }).done(function(data) {
       access_token = data.access_token;
-    });
+      console.log("it worked");
+    })
+    .fail(function(xhr, status, error) {
+      //Ajax request failed.
+      var errorMessage = xhr.status + ': ' + xhr.statusText
+      alert('Error - ' + errorMessage);
+});
 
   }
 
@@ -433,28 +439,40 @@ openButton.addEventListener("click", function() {
   }
 
 
-function getUser()
-{
-  $.ajax({
-    url: 'https://api.spotify.com/v1/me',
-    headers: {
-      'Authorization': 'Bearer ' + access_token
-    },
-    success: function(response) {
-      if (response.id === ('96pcj22qe7b6uom5ifeia72vb' || '1158091471'))
-      {
-        var channel = (response.id === '96pcj22qe7b6uom5ifeia72vb') ? 'channel2' : 'channel1';
-        isBroadcaster = true;
-        setInterval(getBroadcastPlayback, 1000, channel);
-      }
-      else
-      {
-        getUserDeviceInfo()
-      }
+  function getUser()
+  {
+    $.ajax({
+      url: 'https://api.spotify.com/v1/me',
+      headers: {
+        'Authorization': 'Bearer ' + access_token
+      },
+    }).done(function (response) {
+        if (response.id == ('96pcj22qe7b6uom5ifeia72vb') || response.id == ('1158091471'))
+        {
+          var channel;
+          if(response.id == '96pcj22qe7b6uom5ifeia72vb')
+          {
+            channel = 'channel2';
+          }
+          else{
+            channel = 'channel1';
+          }
+          isBroadcaster = true;
+          setInterval(getBroadcastPlayback, 500, channel);
+        }
+        else
+        {
+          getUserDeviceInfo()
+        }
 
-    }
-  });
-}
+    }).fail(function(xhr, status, error) {
+      //Ajax request failed.
+      if(xhr.status == '401')
+      {
+        refreshToken();
+      }
+    });
+  }
 
 function getUserDeviceInfo()
 {
@@ -462,11 +480,12 @@ function getUserDeviceInfo()
     url: 'https://api.spotify.com/v1/player',
     headers: {
       'Authorization': 'Bearer ' + access_token
-    },
-    success: function(response) {
-      deviceID = response.device.id
     }
-  });
+  }).done(function(response)
+    {
+      deviceID = response.device.id
+    });
+
 }
 
 document.getElementById('channel1').addEventListener('click', function()
@@ -513,6 +532,12 @@ document.getElementById('channel2').addEventListener('click', function()
 
   }
 
+});
+
+$( document ).ajaxError(function( event, jqxhr, settings, exception ) {
+    if ( jqxhr.status == 401 ) {
+      refreshToken();
+    }
 });
 
 </script>
