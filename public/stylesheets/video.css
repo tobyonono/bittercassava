@@ -19,7 +19,31 @@
   flex-wrap: wrap;
   padding: 0 4px;
   filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(180deg);
+  animation: backColour 90000ms 0ms infinite linear;
+}
 
+@keyframes backColour{
+  0%{
+    filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(180deg);
+  }
+  16%{
+    filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(240deg);
+  }
+  32%{
+    filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(300deg);
+  }
+  48%{
+    filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(360deg);
+  }
+  64%{
+    filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(420deg);
+  }
+  80%{
+    filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(480deg);
+  }
+  100%{
+    filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(540deg);
+  }
 }
 
 /* Create four equal columns that sits next to each other */
