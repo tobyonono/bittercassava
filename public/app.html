@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/vegetables-outline-2/64/yum_cassava_vegetable_organic_vegetarian-512.png">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-  <link href="//fonts.googleapis.com/css?family=Monoton" rel="stylesheet" media>
-  <link href="//fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" media>
-  <link href="//fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
-  <link href="//fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet" media>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" media>
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Cousine" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/office-code-pro" type="text/css"/>
   <link href="/stylesheets/footer.css" rel="stylesheet" type="text/css"/>
   <link href="/stylesheets/header.css" rel="stylesheet" type="text/css"/>
@@ -23,62 +25,13 @@
     <div class="modal closed" id="modal">
       <div class="headtop">
       <a class="close-button" href="#" id="close-button">
-        <img class="playButton" src="https://cdn.onlinewebfonts.com/svg/img_211963.png" alt="" width="24" height="24">
+        <img class="playButton" src="https://cdn0.iconfinder.com/data/icons/faticons-2/23/close15-512.png" alt="" width="15" height="15">
       </a>
       <h1>RECENTLY PLAYED</h1>
     </div>
       <div class="modal-guts">
-        <ol>
-          <li>
-            <img src="https://www.slantmagazine.com/wp-content/uploads/2005/03/itsmeagain.jpg" alt="" width="48" height="48">
-            <div class="metadata">
-              <span>Janet Jackson</span>
-              <span>Warmth</span>
-              <span>Damita Jo</span>
-            </div>
-            <span class="duration">3:12</span>
-          </li>
-          <hr>
-          <li>
-            <img src="https://i.pinimg.com/originals/f7/be/cf/f7becf29e7782f6320d410abb6294e41.jpg" alt="" width="48" height="48">
-            <div class="metadata">
-              <span>Bilal</span>
-              <span>Soul Sista</span>
-              <span>1st Born Second</span>
-            </div>
-            <span class="duration">4:43</span>
-          </li>
-          <hr>
-          <li>
-            <img src="https://upload.wikimedia.org/wikipedia/en/8/8e/ApolloXXI.jpg" alt="" width="48" height="48">
-            <div class="metadata">
-              <span>Steve Lacy</span>
-              <span>Lay Me Down</span>
-              <span>Apollo XXI</span>
-            </div>
-            <span class="duration">3:43</span>
-          </li>
-          <hr>
-          <li>
-            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/74/Usher_-_Confessions_album_cover.jpg/220px-Usher_-_Confessions_album_cover.jpg" alt="" width="48" height="48">
-            <div class="metadata">
-              <span>Usher</span>
-              <span>Can U Handle It?</span>
-              <span>Confessions</span>
-            </div>
-            <span class="duration">5:13</span>
-          </li>
-          <hr>
-          <li>
-            <img src="https://f4.bcbits.com/img/a1059592304_10.jpg" alt="" width="48" height="48">
-            <div class="metadata">
-              <span>Nick Hakim</span>
-              <span>Needy Bees</span>
-              <span>Green Twins</span>
-            </div>
-            <span class="duration">3:27</span>
-          </li>
-          <hr>
+        <ol class="recentlyPlayed">
+
         </ol>
       </div>
     </div>
@@ -177,9 +130,9 @@
       <div class="NowPlaying">
       <input type ="image" id="channel2" class="playButton paused" src="http://simpleicon.com/wp-content/uploads/play1-64x64.png" alt="" width="32" height="32" />
         <span>Channel 2: </span>
-        <span class="songName">Totems </span>
+        <span class="">Totems </span>
         <span>w/ </span>
-        <span class="artistName">Tweet </span>
+        <span class="">Tweet </span>
         <span class="location">Lagos</span>
         <!--<img src="https://www.slantmagazine.com/wp-content/uploads/2005/03/itsmeagain.jpg" alt="" width="32" height="32">-->
       </div>
@@ -221,6 +174,8 @@
 <script src="/javascripts/TagCloud-master/dist/TagCloud.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+
 <script type="text/javascript">
   var myTags = [
     'Iceberg','Osondu','Ye','Ode To Bear','Junior June','Delta',"3am @ Toni's",
@@ -270,9 +225,10 @@ openButton.addEventListener("click", function() {
 </script>
 <script type="text/javascript">
 
+
   var socket = io();
   var uri;
-  var deviceID;
+  var userdeviceID;
   var isBroadcaster = false;
 
   // get hash parameters from the url
@@ -286,10 +242,19 @@ openButton.addEventListener("click", function() {
     return hashParams;
   }
 
-  var params = getHashParams();
-  var access_token = params.access_token;
-  var refresh_token = params.refresh_token;
-  var error = params.error;
+
+  //var params = getHashParams();
+  //var access_token = params.access_token;
+  //var refresh_token = params.refresh_token;
+  //var error = params.error;
+
+  var refresh_token = Cookies.get("refresh_token");
+  var access_token = Cookies.get("access_token");
+
+  var devicesObj;
+
+
+
 
   function refreshToken()
   {
@@ -300,7 +265,10 @@ openButton.addEventListener("click", function() {
       }
     }).done(function(data) {
       access_token = data.access_token;
-      console.log("it worked");
+      Cookies.set("access_token", access_token);
+      console.log("Token Refresh");
+
+      console.log(access_token);
     })
     .fail(function(xhr, status, error) {
       //Ajax request failed.
@@ -311,7 +279,6 @@ openButton.addEventListener("click", function() {
   }
 
   setTimeout(refreshToken, 1000000);
-  getUserDeviceInfo();
   getUser();
 
   //client socket stuff - joining channels, triggers for spotify api requests etc.
@@ -338,8 +305,16 @@ openButton.addEventListener("click", function() {
         headers: {
           'Authorization': 'Bearer ' + access_token
         },
-        data: JSON.stringify({"uris":[data.uri], "device_id":deviceID, "position_ms":data.progress, "offset": { "uri":data.uri} }),
+        data: JSON.stringify({"uris":[data.uri], "device_id":userdeviceID, "position_ms":data.progress, "offset": { "uri":data.uri} }),
         success: function(response) {
+          $('.recentlyPlayed').prepend(
+            $('<li>').append(
+              $('<img/>', {src: data.imgsrc, alt:"", width: 48, height: 48}),
+              $('<div/>', {class: 'metadata', id: data.trackID}).append(
+                $('<span/>', {class: 'artistName', text: data.artistName}),
+                $('<span/>', {class: 'songName', text: data.songName}),
+                $('<span/>', {class: 'albumName', text: data.albumName}))),
+                $('<hr>'));
         }
       });
     }
@@ -357,12 +332,21 @@ openButton.addEventListener("click", function() {
         headers: {
           'Authorization': 'Bearer ' + access_token
         },
-        data: JSON.stringify({"uris":[data.uri], "device_id":deviceID, "offset": { "uri":data.uri} }),
+        data: JSON.stringify({"uris":[data.uri], "device_id":userdeviceID, "offset": { "uri":data.uri} }),
         success: function(response) {
+          $('.recentlyPlayed').prepend(
+            $('<li>').append(
+              $('<img/>', {src: data.imgsrc, alt:"", width: 48, height: 48}),
+              $('<div/>', {class: 'metadata', id: data.trackID}).append(
+                $('<span/>', {class: 'artistName', text: data.artistName}),
+                $('<span/>', {class: 'songName', text: data.songName}),
+                $('<span/>', {class: 'albumName', text: data.albumName}))),
+                $('<hr>'));
         }
       });
-    }
 
+
+    }
   });
 
   socket.on("pauseSong", function(data)
@@ -377,7 +361,7 @@ openButton.addEventListener("click", function() {
         headers: {
           'Authorization': 'Bearer ' + access_token
         },
-        data: JSON.stringify({"device_id":deviceID}),
+        data: JSON.stringify({"device_id":userdeviceID}),
         success: function(response) {
         }
       });
@@ -435,6 +419,8 @@ openButton.addEventListener("click", function() {
 
       }
 
+
+
     });
   }
 
@@ -446,7 +432,9 @@ openButton.addEventListener("click", function() {
       headers: {
         'Authorization': 'Bearer ' + access_token
       },
+      json: true,
     }).done(function (response) {
+      console.log("inside user func");
         if (response.id == ('96pcj22qe7b6uom5ifeia72vb') || response.id == ('1158091471'))
         {
           var channel;
@@ -462,6 +450,7 @@ openButton.addEventListener("click", function() {
         }
         else
         {
+          console.log("inside else part func");
           getUserDeviceInfo()
         }
 
@@ -469,7 +458,11 @@ openButton.addEventListener("click", function() {
       //Ajax request failed.
       if(xhr.status == '401')
       {
+        console.log("it failed");
+
         refreshToken();
+        $.ajax(this);
+        return;
       }
     });
   }
@@ -477,14 +470,53 @@ openButton.addEventListener("click", function() {
 function getUserDeviceInfo()
 {
   $.ajax({
-    url: 'https://api.spotify.com/v1/player',
+    url: 'https://api.spotify.com/v1/me/player/devices',
     headers: {
       'Authorization': 'Bearer ' + access_token
-    }
+    },
+    json: true,
   }).done(function(response)
     {
-      deviceID = response.device.id
+
+      for (var i=0; i < response.devices.length ; i++)
+      {
+        if(response.devices[i]['is_active'] == true)
+        {
+          userdeviceID = response.devices[i]['id']
+        }
+
+        else if(response.devices.length == 1)
+        {
+          userdeviceID = response.devices[i]['id']
+        }
+
+        else if(response.devices[i]['type'] == 'Computer')
+        {
+          userdeviceID = response.devices[i]['id']
+        }
+      }
+
+
+      console.log("DeviceID " + userdeviceID)
+      console.log(response);
+      var deviceArray = [];
+      deviceArray[0] = userdeviceID;
+      $.ajax({
+        url: 'https://api.spotify.com/v1/me/player',
+        headers: {
+          'Authorization': 'Bearer ' + access_token
+        },
+        contentType: 'application/json',
+        type: 'PUT',
+        data: JSON.stringify({"device_ids":[userdeviceID], "play": true}),
+      }).done(function(response)
+      {
+        console.log("Playback successfully transferred");
+
+      });
+
     });
+
 
 }
 

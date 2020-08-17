@@ -140,6 +140,8 @@ input{
   width: 600px;
   max-width: 100%;
   font-family: 'Overpass Mono', monospace;
+  /*font-family: 'Source Code Pro', sans-serif;*/
+
 
   height: 400px;
   max-height: 100%;
@@ -185,6 +187,9 @@ input{
   padding: 0px 50px 20px 20px;
   overflow: auto;
   margin-top: 5%;
+  font-family: 'Source Code Pro', sans-serif;
+  font-weight: bold;
+
 }
 
 
@@ -241,6 +246,19 @@ h1 {
 
 li img{
   border-radius: 10%;
+  margin-right: 10px;
+}
+
+.songName{
+  color: orangered;
+}
+
+.artistName{
+  color: #b32200;
+}
+
+.albumName{
+  color: saddlebrown;
 }
 
 ::-webkit-scrollbar {
