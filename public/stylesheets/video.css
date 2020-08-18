@@ -64,6 +64,65 @@
     flex: 50%;
     max-width: 50%;
   }
+
+  .NowPlaying, .StreamBar{
+    width: 100%;
+  }
+
+  .header-container{
+    display: inline-block;
+    border:none;
+  }
+
+  .Live{
+    display: none;
+  }
+
+  .icons{
+    position: fixed
+    right:0;
+    border: none;
+    width: 100px;
+  }
+
+  .imgIcon{
+    height:28px;
+    border: none;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .column {
+    flex: 25%;
+    max-width: 25%;
+  }
+
+  .NowPlaying, .StreamBar{
+    width: 100%;
+  }
+
+  .header-container{
+    display: inline-block;
+    border:none;
+  }
+
+  .Live{
+    display: none;
+  }
+
+  .icons{
+    position: fixed;
+    right:0;
+    border: none;
+    width: 100px;
+  }
+
+  .imgIcon{
+    height:28px;
+    border: 1px solid white;
+  }
+
+
 }
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
@@ -71,5 +130,31 @@
   .column {
     flex: 100%;
     max-width: 100%;
+  }
+
+  .NowPlaying, .StreamBar{
+    width: 100%;
+  }
+
+  .header-container{
+    display: inline-block;
+    border:none;
+  }
+
+  .Live{
+    display: none;
+  }
+
+  .icons{
+    position: fixed
+    right:0;
+    border: none;
+    width: 100px;
+  }
+
+  .imgIcon{
+    height:28px;
+    border: 1px solid white;
+    width: 100px;
   }
 }

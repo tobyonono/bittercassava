@@ -1,7 +1,7 @@
 48<!DOCTYPE html>
 <html>
 <head>
-  <title>Example</title>
+  <title>Bitter Cassava</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/vegetables-outline-2/64/yum_cassava_vegetable_organic_vegetarian-512.png">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -30,10 +30,12 @@
       <h1>RECENTLY PLAYED</h1>
     </div>
       <div class="modal-guts">
+        <div>
         <ol class="recentlyPlayed">
 
         </ol>
       </div>
+    </div>
     </div>
     <div class="video-background">
         <div class="video-foreground">
@@ -283,6 +285,22 @@ openButton.addEventListener("click", function() {
 
   //client socket stuff - joining channels, triggers for spotify api requests etc.
 
+  function transferPlayback(){
+    $.ajax({
+      url: 'https://api.spotify.com/v1/me/player',
+      headers: {
+        'Authorization': 'Bearer ' + access_token
+      },
+      contentType: 'application/json',
+      type: 'PUT',
+      data: JSON.stringify({"device_ids":[userdeviceID]}),
+    }).done(function(response)
+    {
+      console.log("Playback successfully transferred");
+
+    });
+  }
+
   function joinChannel(channelNum)
   {
     socket.emit("join", channelNum)
@@ -297,6 +315,8 @@ openButton.addEventListener("click", function() {
   {
     if(isBroadcaster == false)
     {
+      transferPlayback();
+
       $.ajax({
         url: 'https://api.spotify.com/v1/me/player/play',
         contentType: 'application/json',
@@ -324,6 +344,8 @@ openButton.addEventListener("click", function() {
   {
     if(isBroadcaster == false)
     {
+      transferPlayback();
+
       $.ajax({
         url: 'https://api.spotify.com/v1/me/player/play',
         contentType: 'application/json',
@@ -353,6 +375,8 @@ openButton.addEventListener("click", function() {
   {
     if(isBroadcaster == false)
     {
+      transferPlayback();
+
       $.ajax({
         url: 'https://api.spotify.com/v1/me/player/pause',
         contentType: 'application/json',
@@ -508,7 +532,7 @@ function getUserDeviceInfo()
         },
         contentType: 'application/json',
         type: 'PUT',
-        data: JSON.stringify({"device_ids":[userdeviceID], "play": true}),
+        data: JSON.stringify({"device_ids":[userdeviceID]}),
       }).done(function(response)
       {
         console.log("Playback successfully transferred");
