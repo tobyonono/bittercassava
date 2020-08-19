@@ -125,7 +125,7 @@
       </div>
       <div class="StreamBar">
         <input type="image" id="channel1" class="playButton paused" src="http://simpleicon.com/wp-content/uploads/play1-64x64.png" alt="" width="32" height="32" />
-        <span>Channel 1: After Dark Selections w/ Toby</span>
+        <span>Channel 1: Molasses w/ Toby</span>
         <span class="location">Dublin</span>
 
       </div>
@@ -325,7 +325,7 @@ openButton.addEventListener("click", function() {
         headers: {
           'Authorization': 'Bearer ' + access_token
         },
-        data: JSON.stringify({"uris":[data.uri], "device_id":userdeviceID, "position_ms":data.progress, "offset": { "uri":data.uri} }),
+        data: JSON.stringify({"uris":[data.uri], "device_id":userdeviceID, "position_ms":data.progress }),
         success: function(response) {
           $('.recentlyPlayed').prepend(
             $('<li>').append(
@@ -354,7 +354,7 @@ openButton.addEventListener("click", function() {
         headers: {
           'Authorization': 'Bearer ' + access_token
         },
-        data: JSON.stringify({"uris":[data.uri], "device_id":userdeviceID, "offset": { "uri":data.uri} }),
+        data: JSON.stringify({"uris":[data.uri], "device_id":userdeviceID, }),
         success: function(response) {
           $('.recentlyPlayed').prepend(
             $('<li>').append(
@@ -375,7 +375,7 @@ openButton.addEventListener("click", function() {
   {
     if(isBroadcaster == false)
     {
-      transferPlayback();
+
 
       $.ajax({
         url: 'https://api.spotify.com/v1/me/player/pause',
@@ -470,7 +470,7 @@ openButton.addEventListener("click", function() {
             channel = 'channel1';
           }
           isBroadcaster = true;
-          setInterval(getBroadcastPlayback, 500, channel);
+          setInterval(getBroadcastPlayback, 250, channel);
         }
         else
         {
