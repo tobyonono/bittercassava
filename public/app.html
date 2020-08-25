@@ -42,37 +42,37 @@
           <!--<iframe id="backgroundvid" <iframe width="560" height="315" src="/videos/SP.mp4?autoplay=1" frameborder="0"  mute="1" allow="accelerometer; autoplay *; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>></iframe>-->
           <div class="row">
             <div class="column">
-              <img src="/gifs/lh.gif">
-              <img src="/gifs/denzel.gif">
-              <img src="/gifs/giphy.gif">
+              <img src="/gifs/durimel.gif">
+              <img src="/gifs/popcaan.gif">
+              <img src="/gifs/dancaesar.gif">
               <img src="/gifs/fp.gif">
             </div>
             <div class="column">
-              <img src="/gifs/denzel2.gif">
-              <img src="/gifs/jordan.gif">
-              <img src="/gifs/testimage.gif">
-              <img src="/gifs/sofiegif.gif">
+              <img src="/gifs/dap.gif">
+              <img src="/gifs/shellyann.gif">
+              <img src="/gifs/gs.gif">
+              <img src="/gifs/atu.gif">
               <img src="/gifs/denzel.gif">
               <img src="/gifs/giphy.gif">
             </div>
             <div class="column">
-              <img src="/gifs/icecube.gif">
+              <img src="/gifs/caine.gif">
               <img src="/gifs/drake.gif">
-              <img src="/gifs/harden.gif">
-              <img src="/gifs/friday.gif">
+              <img src="/gifs/dance.gif">
+              <img src="/gifs/ethiopia.gif">
             </div>
             <div class="column">
-              <img src="/gifs/kid.gif">
-              <img src="/gifs/giphy.gif">
+              <img src="/gifs/serena.gif">
+              <img src="/gifs/jorja.gif">
               <img src="/gifs/praise.gif">
-              <img src="/gifs/sofiegif.gif">
+              <img src="/gifs/dance.gif">
               <img src="/gifs/denzel.gif">
               <img src="/gifs/giphy.gif">
             </div>
             <div class="column">
-              <img src="/gifs/testimage.gif">
+              <img src="/gifs/atu.gif">
               <img src="/gifs/car.gif">
-              <img src="/gifs/sofiegif.gif">
+              <img src="/gifs/ghana.gif">
               <img src="/gifs/icecube.gif">
               <img src="/gifs/sofiegif.gif">
               <img src="/gifs/giphy.gif">
@@ -82,35 +82,6 @@
               <img src="/gifs/testimage.gif">
               <img src="/gifs/giphy.gif">
               <img src="/gifs/sofiegif.gif">
-            </div>
-            <div class="column">
-              <img src="/gifs/testimage.gif">
-              <img src="/gifs/giphy.gif">
-              <img src="/gifs/sofiegif.gif">
-            </div>
-            <div class="column">
-              <img src="/gifs/testimage.gif">
-              <img src="/gifs/giphy.gif">
-              <img src="/gifs/sofiegif.gif">
-              <img src="/gifs/icecube.gif">
-              <img src="/gifs/sofiegif.gif">
-              <img src="/gifs/giphy.gif">
-            </div>
-            <div class="column">
-              <img src="/gifs/testimage.gif">
-              <img src="/gifs/giphy.gif">
-              <img src="/gifs/sofiegif.gif">
-              <img src="/gifs/sofiegif.gif">
-              <img src="/gifs/denzel.gif">
-              <img src="/gifs/giphy.gif">
-            </div>
-            <div class="column">
-              <img src="/gifs/testimage.gif">
-              <img src="/gifs/giphy.gif">
-              <img src="/gifs/sofiegif.gif">
-              <img src="/gifs/icecube.gif">
-              <img src="/gifs/sofiegif.gif">
-              <img src="/gifs/giphy.gif">
             </div>
           </div>
 
@@ -173,39 +144,10 @@
     </footer>
   </div>
 </body>
-<script src="/javascripts/TagCloud-master/dist/TagCloud.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 
-<script type="text/javascript">
-  var myTags = [
-    'Iceberg','Osondu','Ye','Ode To Bear','Junior June','Delta',"3am @ Toni's",
-    'unseen freestyle', 'Adorn', 'Chicago Freestyle',"Don't Touch My Hair", "Incomplete Kisses",
-    'Lay Me Down', 'Special Affair', 'Discipline', 'Warmth', 'Cab Ride', 'Good & Plenty',
-    'Holding Hands In Public', 'John Redcorn', 'Fire & Desire', 'The Root', 'Soul Sista'
-  ];
-
-  var tagCloud = TagCloud('.cloudContent', myTags,{
-
-    // radius in px
-    radius: 900,
-
-    // animation speed
-    // slow, normal, fast
-    maxSpeed: 'slow',
-    initSpeed: 'slow',
-
-    // 0 = top
-    // 90 = left
-    // 135 = right-bottom
-    direction: 135,
-
-    // interact with cursor move on mouse out
-    keep: true
-
-});
-</script>
 
 <script type="text/javascript">
 var modal = document.querySelector("#modal");
@@ -301,6 +243,7 @@ openButton.addEventListener("click", function() {
     });
   }
 
+
   function joinChannel(channelNum)
   {
     socket.emit("join", channelNum)
@@ -334,6 +277,7 @@ openButton.addEventListener("click", function() {
                 $('<span/>', {class: 'artistName', text: data.artistName}),
                 $('<span/>', {class: 'songName', text: data.songName}),
                 $('<span/>', {class: 'albumName', text: data.albumName}))),
+                $('<img/>', {class: 'addSong', id: data.trackID, src: "https://images.vexels.com/media/users/3/139162/isolated/preview/8b23fcb6b6c68d0f290b8dc5b5252214-cross-or-plus-icon-by-vexels.png", alt:"", width: 18, height: 18}),
                 $('<hr>'));
         }
       });
@@ -363,6 +307,7 @@ openButton.addEventListener("click", function() {
                 $('<span/>', {class: 'artistName', text: data.artistName}),
                 $('<span/>', {class: 'songName', text: data.songName}),
                 $('<span/>', {class: 'albumName', text: data.albumName}))),
+                $('<img/>', {class: 'addSong', id: data.trackID, src: "https://images.vexels.com/media/users/3/139162/isolated/preview/8b23fcb6b6c68d0f290b8dc5b5252214-cross-or-plus-icon-by-vexels.png", alt:"", width: 18, height: 18}),
                 $('<hr>'));
         }
       });
@@ -587,6 +532,31 @@ document.getElementById('channel2').addEventListener('click', function()
     $('#channel2').attr('src', 'http://simpleicon.com/wp-content/uploads/play1-64x64.png');
 
   }
+
+});
+
+$(document).on("click",".addSong", function(){
+
+  var selectedSong;
+  selectedSong = $(this).attr('id');
+
+  $.ajax({
+    url: 'https://api.spotify.com/v1/me/tracks',
+    contentType: 'application/json',
+    type: 'PUT',
+    dataType: 'json',
+    headers: {
+      'Authorization': 'Bearer ' + access_token
+    },
+    data: JSON.stringify({"ids":[selectedSong]}),
+    success: function(response) {
+    }
+  });
+
+  $(this).attr('src', 'https://cdn1.iconfinder.com/data/icons/freeline/32/accept_check_ok_outline_tick_yes-20.png');
+
+
+
 
 });
 

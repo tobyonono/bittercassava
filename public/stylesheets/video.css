@@ -93,8 +93,8 @@
 
 @media screen and (max-width: 900px) {
   .column {
-    flex: 25%;
-    max-width: 25%;
+    flex: 33%;
+    max-width: 33%;
   }
 
   .NowPlaying, .StreamBar{

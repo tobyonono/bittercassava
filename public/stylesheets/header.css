@@ -239,6 +239,10 @@ h1 {
   font-size: 12px;
 }
 
+.addSong{
+  filter: invert(100);
+}
+
 .duration{
   position: absolute;
   right: 0;
@@ -250,7 +254,7 @@ li img{
 }
 
 .songName{
-  color: orangered;
+  color: chocolate;
 }
 
 .artistName{
