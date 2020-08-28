@@ -269,3 +269,17 @@ li img{
     width: 0px;
     background: transparent; /* make scrollbar transparent */
 }
+
+.header-list-item {
+    width: 100%;
+}
+
+.header-hist-container {
+    display: flex;
+}
+
+.header-add-song-icon {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+}

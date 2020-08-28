@@ -31,19 +31,23 @@
     </div>
       <div class="modal-guts">
         <div>
-          <ol class="recentlyPlayed">
-            <li>
-              <div class="histContainer">
-                <img src="https://www.slantmagazine.com/wp-content/uploads/2005/03/itsmeagain.jpg" alt="" width="48" height="48">
+          <ol class="recently-played">
+            <li class="header-list-item">
+              <div class="header-hist-container">
+                <div>
+                  <img src="https://www.slantmagazine.com/wp-content/uploads/2005/03/itsmeagain.jpg" alt="" width="48" height="48">
+                </div>
                 <div class="metadata">
                   <span class="artistName">Janet Jackson</span>
                   <span class="songName">Warmth</span>
                   <span class="albumName">Damita Jo</span>
                 </div>
-                <img class="addSong" src="https://images.vexels.com/media/users/3/139162/isolated/preview/8b23fcb6b6c68d0f290b8dc5b5252214-cross-or-plus-icon-by-vexels.png" width="18" height="18">
+                <div class="header-add-song-icon">
+                  <img class="addSong" src="https://images.vexels.com/media/users/3/139162/isolated/preview/8b23fcb6b6c68d0f290b8dc5b5252214-cross-or-plus-icon-by-vexels.png" width="18" height="18">
+                </div>
               </div>
+              <hr>
             </li>
-            <hr>
           </ol>
       </div>
     </div>
@@ -281,7 +285,7 @@ openButton.addEventListener("click", function() {
         },
         data: JSON.stringify({"uris":[data.uri], "device_id":userdeviceID, "position_ms":data.progress }),
         success: function(response) {
-          $('.recentlyPlayed').prepend(
+          $('.recently-played').prepend(
             $('<li>').append(
               $('<img/>', {src: data.imgsrc, alt:"", width: 48, height: 48}),
               $('<div/>', {class: 'metadata', id: data.trackID}).append(
@@ -311,7 +315,7 @@ openButton.addEventListener("click", function() {
         },
         data: JSON.stringify({"uris":[data.uri], "device_id":userdeviceID, }),
         success: function(response) {
-          $('.recentlyPlayed').prepend(
+          $('.recently-played').prepend(
             $('<li>').append(
               $('<img/>', {src: data.imgsrc, alt:"", width: 48, height: 48}),
               $('<div/>', {class: 'metadata', id: data.trackID}).append(
