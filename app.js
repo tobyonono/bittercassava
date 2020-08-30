@@ -14,7 +14,7 @@ var usersRouter = require('./routes/users');
 
 var client_id = 'bacb63ddfb4448f2b7b47fc39dccbe1a'; // Your client id
 var client_secret = '290f92b09a1f45b1b1fcd2ea691e7a79'; // Your secret
-var redirect_uri = 'https://fast-meadow-72433/callback'; // Your redirect uri
+var redirect_uri = 'https://fast-meadow-72433.herokuapp.com/callback'; // Your redirect uri
 
 var app = express();
 var clientSide = express();
