@@ -192,7 +192,9 @@ input{
 
 }
 
-
+.headtop{
+  text-align: center;
+}
 
 * {
   box-sizing: border-box;
@@ -208,6 +210,7 @@ li, p {
 }
 h1 {
   margin: 0 0 20px 0;
+  font-size: medium;
 }
 
 
@@ -263,6 +266,20 @@ li img{
 
 .albumName{
   color: saddlebrown;
+}
+
+.header-list-item {
+    width: 100%;
+}
+
+.histContainer {
+    display: flex;
+}
+
+.header-add-song-icon {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
 }
 
 ::-webkit-scrollbar {
