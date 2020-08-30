@@ -256,6 +256,4 @@ io.sockets.on("connection", function(socket)
 
 const port = 4000;
 
-server.listen((port || process.env.PORT), () => {
-    console.log(`Server listening at ${port}`);
-});
+server.listen(process.env.PORT || port);
