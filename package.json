@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node app.js"
   },
+
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
@@ -22,5 +23,8 @@
     "shortid": "^2.2.15",
     "socket.io": "^2.3.0",
     "spotify-web-api-js": "^1.4.0"
+  },
+  "engines": {
+    "node": "12.6.1"
   }
 }
