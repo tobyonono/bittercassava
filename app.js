@@ -14,7 +14,7 @@ var usersRouter = require('./routes/users');
 
 var client_id = 'bacb63ddfb4448f2b7b47fc39dccbe1a'; // Your client id
 var client_secret = '290f92b09a1f45b1b1fcd2ea691e7a79'; // Your secret
-var redirect_uri = 'https://fast-meadow-72433.herokuapp.com/callback'; // Your redirect uri
+var redirect_uri = 'http://localhost:4000/callback'; // Your redirect uri
 
 var app = express();
 var clientSide = express();
@@ -22,37 +22,11 @@ var clientSide = express();
 var server = require("http").Server(app);
 var io = require("socket.io")(server, {});
 var shortid = require('shortid');
-var broadcastingAccessToken;
-var broadCastingRefreshToken;
 
-var imgsrc;
-var currentUserName;
-var profiler;
-var songName;
-var artistName;
-var albumName;
-var progress;
-var songLength;
-var songURL;
-var isPlaying;
-var uri;
-var deviceID;
-var playbackArray = [];
+
 var i = 0;
 var playbackJson = {"channel1":[], "channel2":[]};
 var latestInfo = {"channel1":[], "channel2":[]};
-
-var jsonPushData = {
-  userName: currentUserName,
-  albumArt: imgsrc,
-  songName: songName,
-  artistName: artistName,
-  albumName: albumName,
-  songProgress: progress,
-  songLength: songLength,
-  songURL: songURL,
-  isPlaying: isPlaying
-};
 
 // view engine setup
 
@@ -105,6 +79,10 @@ app.get('/home', function(req, res) {
   res.sendFile(__dirname + "/public/app.html");
 });
 
+app.get('/broadcaster', function(req, res) {
+  res.sendFile(__dirname + "/public/broadcaster.html");
+});
+
 app.get('/postTokens', function(req, res){
   res.setHeader('Content-Type', 'application/json');
   res.json(req.tokens);
@@ -118,6 +96,7 @@ app.get('/callback', function(req, res) {
   var code = req.query.code || null;
   var state = req.query.state || null;
   var storedState = req.cookies ? req.cookies[stateKey] : null;
+
 
   if (state === null || state !== storedState) {
     res.redirect('/#' +
@@ -142,14 +121,12 @@ app.get('/callback', function(req, res) {
     request.post(authOptions, function(error, response, body) {
       if (!error && response.statusCode === 200) {
 
+        let isBroadcaster = false;
+        let query = querystring.stringify({
+          "isBroadcaster": false
+        });
         var access_token = body.access_token,
-            refresh_token = body.refresh_token;
-
-        var options = {
-          url: 'https://api.spotify.com/v1/me',
-          headers: { 'Authorization': 'Bearer ' + access_token },
-          json: true
-        };
+        refresh_token = body.refresh_token;
 
         res.cookie('refresh_token', refresh_token, {
           maxAge: 30 * 24 * 3600 * 1000
@@ -158,15 +135,44 @@ app.get('/callback', function(req, res) {
         res.cookie('access_token', access_token, {
           maxAge: 30 * 24 * 3600 * 1000
         });
+
+        var options = {
+          url: 'https://api.spotify.com/v1/me',
+          headers: { 'Authorization': 'Bearer ' + access_token },
+          json: true
+        };
+
+        request.get(options, function(error, response, body)
+        {
+          if(!error && response.statusCode === 200) {
+            if(body.id === ('96pcj22qe7b6uom5ifeia72vb') || body.id === ('1158091471'))
+            {
+              res.redirect('/broadcaster');
+            }
+            else
+            {
+              res.redirect('/home');
+            }
+          }
+
+        });
+
+
+
+
         // use the access token to access the Spotify Web API
 
         // we can also pass the token to the browser to make requests from there
-        res.redirect('/home/');
+/*
+        res.redirect('/home/' + querystring.stringify({
+          "isBroadcaster": isBroadcaster
+      }));
+      */
       } else {
         res.redirect('/#' +
-          querystring.stringify({
-            error: 'invalid_token'
-          }));
+        querystring.stringify({
+          error: 'invalid_token'
+        }));
       }
     });
   }

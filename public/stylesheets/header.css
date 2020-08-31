@@ -56,6 +56,7 @@ white-space: pre-wrap;
 
 .Live{
   width: 8%;
+  min-width: 95px;
   border: 1px solid white;
   display: flex;
   align-items: center;
@@ -69,13 +70,14 @@ input{
 
 .icons{
   width: 8%;
+  min-width: 102px;
   color: white;
   display: flex;
   align-items: center;
 }
 
 .imgIcon{
-  width: 33%;
+  width: 33.3%;
   border: 1px solid white;
   height: 100%;
   display: flex;
@@ -184,8 +186,8 @@ input{
 
   width: 100%;
   height: 100%;
-  padding: 0px 0px 30px 40px;
-  overflow: auto;
+  padding: 0px 30px 30px 30px;
+  overflow-y: auto;
   margin-top: 5%;
   font-family: 'Source Code Pro', sans-serif;
   font-weight: bold;
@@ -285,4 +287,10 @@ li img{
 ::-webkit-scrollbar {
     width: 0px;
     background: transparent; /* make scrollbar transparent */
+}
+
+@media screen and (max-width: 800px) {
+  .modal-guts {
+  padding:  0px 30px 30px 30px;
+  }
 }

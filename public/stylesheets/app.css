@@ -21,7 +21,8 @@ footer {
 
 
 .container{
-  text-align: center;
+  height: 100%;
+  width: 100%;
 }
 
 .loader
@@ -56,20 +57,21 @@ footer {
     100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
 }
 
+#login {
+  height: 100%;
+  width: 100%;
+}
 #player-container {
     margin: 0%;
-    z-index: 10000;
-    height: 100vh;
+    height: 100%;
     display: -ms-flexbox;
-    bottom: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     -ms-flex-align: center;
     align-self: flex-start;
-    margin-right: 20px;
     font-family: 'Roboto Mono', monospace;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bold;
     letter-spacing: 9px;
 }
@@ -78,8 +80,6 @@ footer {
     /*position: relative;*/
     display: inline-block;
     overflow: hidden;
-    top: 10px;
-    z-index: 1000;
 }
 
  #play-button-container svg {
