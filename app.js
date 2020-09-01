@@ -221,6 +221,7 @@ io.sockets.on('connection', function (socket) {
     //need latestInfo for users who join mid song. playbackJson is for comparison to know when to trigger an api call for the user
     latestInfo[data.channel][0] = data;
 
+    // This is a little messy! TODO: clean it up with some refactoring/comments
     if (playbackJson[data.channel].length === 0) {
       playbackJson[data.channel].push(data);
       console.log(playbackJson);
