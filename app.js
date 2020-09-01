@@ -1,3 +1,9 @@
+var atatus = require("atatus-nodejs");
+atatus.start({
+    licenseKey: "lic_apm_4c2f8685f0a845dd9ad50edfb33b3534",
+    appName: "Bitter Cassava",
+});
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
