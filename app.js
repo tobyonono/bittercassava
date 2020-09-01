@@ -27,9 +27,6 @@ if (
   return;
 }
 
-const playbackJson = { channel1: [], channel2: [] };
-const latestInfo = { channel1: [], channel2: [] };
-
 // Express Server Setup
 const PORT = process.env.PORT || 4000;
 const REDIRECT_URI = `http://localhost:${PORT}/callback`;
@@ -204,6 +201,9 @@ app.get('/refresh_token', function (req, res) {
    them to non broadcasters depending on what room they are in. Also handles joining + leaving rooms
    which are the channels on the frontend
 */
+
+const playbackJson = { channel1: [], channel2: [] };
+const latestInfo = { channel1: [], channel2: [] };
 
 io.sockets.on('connection', function (socket) {
   socket.on('join', function (data) {
