@@ -9,12 +9,11 @@ const app = express();
 const dotenv = require('dotenv');
 const server = require('http').Server(app);
 const io = require('socket.io')(server, {});
-dotenv.config({path: __dirname + '/.env'});
+dotenv.config({ path: __dirname + '/.env' });
 
 // Spotify Credentials
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
-
 
 // Verify that environment variables are set
 if (
@@ -30,7 +29,7 @@ if (
 
 // Express Server Setup
 const PORT = process.env.PORT || 4000;
-const REDIRECT_URI = `http://localhost:${PORT}/callback`;
+const REDIRECT_URI = process.env.REDIRECT_URI;
 
 app.use(logger('dev'));
 app.use(express.json());
