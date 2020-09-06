@@ -1,0 +1,5 @@
+.jshintrc
+
+node_modules/
+
+.env
