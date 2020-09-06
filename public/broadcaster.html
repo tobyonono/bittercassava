@@ -1,327 +1,375 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Bitter Cassava Broadcaster</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/vegetables-outline-2/64/yum_cassava_vegetable_organic_vegetarian-512.png">
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet" media>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" media>
-  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Cousine" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap" rel="stylesheet">
+  <head>
+    <title>Bitter Cassava Broadcaster</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="https://cdn3.iconfinder.com/data/icons/vegetables-outline-2/64/yum_cassava_vegetable_organic_vegetarian-512.png"
+    />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet" media />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" media />
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css?family=Cousine" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
 
-  <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/office-code-pro" type="text/css"/>
-  <link href="/stylesheets/footer.css" rel="stylesheet" type="text/css"/>
-  <link href="/stylesheets/header.css" rel="stylesheet" type="text/css"/>
-  <link href="/stylesheets/video.css" rel="stylesheet" type="text/css"/>
-
-</head>
-<body>
-  <div class="contentContainer">
-    <div class="modal-overlay closed" id="modal-overlay"></div>
-    <div class="modal closed" id="modal">
-      <div class="headtop">
-      <a class="close-button" href="#" id="close-button">
-        <img class="playButton" src="https://cdn.pixabay.com/photo/2014/09/26/10/45/delete-462216_1280.png" alt="" width="20" height="20">
-      </a>
-      <h1>RECENTLY PLAYED</h1>
-    </div>
-      <div class="modal-guts">
-        <div>
-          <ol class="recentlyPlayed">
-
-          </ol>
+    <link
+      rel="stylesheet"
+      media="screen"
+      href="https://fontlibrary.org/face/office-code-pro"
+      type="text/css"
+    />
+    <link href="/stylesheets/footer.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/header.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/video.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="contentContainer">
+      <div class="modal-overlay closed" id="modal-overlay"></div>
+      <div class="modal closed" id="modal">
+        <div class="headtop">
+          <a class="close-button" href="#" id="close-button">
+            <img
+              class="playButton"
+              src="https://cdn.pixabay.com/photo/2014/09/26/10/45/delete-462216_1280.png"
+              alt=""
+              width="20"
+              height="20"
+            />
+          </a>
+          <h1>RECENTLY PLAYED</h1>
+        </div>
+        <div class="modal-guts">
+          <div>
+            <ol class="recentlyPlayed"></ol>
+          </div>
+        </div>
       </div>
-    </div>
-    </div>
-    <div class="video-background">
+      <div class="video-background">
         <div class="video-foreground">
           <!--<iframe id="backgroundvid" <iframe width="560" height="315" src="/videos/SP.mp4?autoplay=1" frameborder="0"  mute="1" allow="accelerometer; autoplay *; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>></iframe>-->
           <div class="row">
             <div class="column">
-              <img src="/gifs/durimel.gif">
-              <img src="/gifs/popcaan.gif">
-              <img src="/gifs/dancaesar.gif">
-              <img src="/gifs/fp.gif">
+              <video autoplay="autoplay" loop="loop" muted>
+                <source src="/gifs/durimel.mp4" type="video/mp4" />
+              </video>
+              <video autoplay="autoplay" loop="loop" muted>
+                <source src="/gifs/popcaan.mp4" type="video/mp4" />
+              </video>
+              <video autoplay="autoplay" loop="loop" muted>
+                <source src="/gifs/dancaesar.mp4" type="video/mp4" />
+              </video>
+              <img src="/gifs/fp.gif" />
             </div>
             <div class="column">
-              <img src="/gifs/dap.gif">
-              <img src="/gifs/shellyann.gif">
-              <img src="/gifs/gs.gif">
-              <img src="/gifs/atu.gif">
-              <img src="/gifs/denzel.gif">
-              <img src="/gifs/giphy.gif">
+              <video autoplay="autoplay" loop="loop" muted>
+                <source src="/gifs/dap.mp4" type="video/mp4" />
+              </video>
+              <video autoplay="autoplay" loop="loop" muted>
+                <source src="/gifs/shellyann.mp4" type="video/mp4" />
+              </video>
+              <video autoplay="autoplay" loop="loop" muted>
+                <source src="/gifs/ghana.mp4" type="video/mp4" />
+              </video>
+              <video autoplay="autoplay" loop="loop" muted>
+                <source src="/gifs/sampha.mp4" type="video/mp4" />
+              </video>
+              <img src="/gifs/denzel.gif" />
+              <img src="/gifs/giphy.gif" />
             </div>
             <div class="column">
-              <img src="/gifs/caine.gif">
-              <img src="/gifs/drake.gif">
-              <img src="/gifs/dance.gif">
-              <img src="/gifs/ethiopia.gif">
+              <video autoplay="autoplay" loop="loop" muted>
+                <source src="/gifs/caine.mp4" type="video/mp4" />
+              </video>
+              <video autoplay="autoplay" loop="loop" muted>
+                <source src="/gifs/gs.mp4" type="video/mp4" />
+              </video>
+              <img src="/gifs/dance.gif" />
+              <video autoplay="autoplay" loop="loop" muted>
+                <source src="/gifs/ethiopia.mp4" type="video/mp4" />
+              </video>
             </div>
             <div class="column">
-              <img src="/gifs/serena.gif">
-              <img src="/gifs/jorja.gif">
-              <img src="/gifs/praise.gif">
-              <img src="/gifs/dance.gif">
-              <img src="/gifs/denzel.gif">
-              <img src="/gifs/giphy.gif">
+              <video autoplay="autoplay" loop="loop" muted>
+                <source src="/gifs/serena.mp4" type="video/mp4" />
+              </video>
+              <video autoplay="autoplay" loop="loop" muted>
+                <source src="/gifs/jorja.mp4" type="video/mp4" />
+              </video>
+              <video autoplay="autoplay" loop="loop" muted>
+                <source src="/gifs/praise.mp4" type="video/mp4" />
+              </video>
+              <video autoplay="autoplay" loop="loop" muted>
+                <source src="/gifs/dance.mp4" type="video/mp4" />
+              </video>
+              <img src="/gifs/denzel.gif" />
+              <img src="/gifs/giphy.gif" />
             </div>
             <div class="column">
-              <img src="/gifs/atu.gif">
-              <img src="/gifs/car.gif">
-              <img src="/gifs/ghana.gif">
-              <img src="/gifs/icecube.gif">
-              <img src="/gifs/sofiegif.gif">
-              <img src="/gifs/giphy.gif">
-
+              <video autoplay="autoplay" loop="loop" muted>
+                <source src="/gifs/atu.mp4" type="video/mp4" />
+              </video>
+              <img src="/gifs/car.gif" />
+              <video autoplay="autoplay" loop="loop" muted>
+                <source src="/gifs/solange.mp4" type="video/mp4" />
+              </video>
+              <img src="/gifs/icecube.gif" />
+              <img src="/gifs/sofiegif.gif" />
+              <img src="/gifs/giphy.gif" />
             </div>
             <div class="column">
-              <img src="/gifs/testimage.gif">
-              <img src="/gifs/giphy.gif">
-              <img src="/gifs/sofiegif.gif">
+              <img src="/gifs/testimage.gif" />
+              <img src="/gifs/giphy.gif" />
+              <img src="/gifs/sofiegif.gif" />
             </div>
           </div>
-
         </div>
       </div>
-    <header class="header-container">
-      <div class="Live">
-        <div class="label-wrapper">
-          <span>Live Now</span>
-          <span class="circle"></span>
+      <header class="header-container">
+        <div class="Live">
+          <div class="label-wrapper">
+            <span>Live Now</span>
+            <span class="circle"></span>
+          </div>
         </div>
-      </div>
-      <div class="StreamBar">
-        <input type="image" id="channel1" class="playButton paused" src="http://simpleicon.com/wp-content/uploads/play1-64x64.png" alt="" width="32" height="32" />
-        <span>Channel 1: Molasses w/ Toby</span>
-        <span class="location">Dublin</span>
-
-      </div>
-      <div class="NowPlaying">
-      <input type ="image" id="channel2" class="playButton paused" src="http://simpleicon.com/wp-content/uploads/play1-64x64.png" alt="" width="32" height="32" />
-        <span>Channel 2: </span>
-        <span class="">Totems </span>
-        <span>w/ </span>
-        <span class="">Tweet </span>
-        <span class="location">Lagos</span>
-        <!--<img src="https://www.slantmagazine.com/wp-content/uploads/2005/03/itsmeagain.jpg" alt="" width="32" height="32">-->
-      </div>
-      <div class="icons">
-        <div class="imgIcon">
-          <a href="#" id="openHistory"><img src="https://cdn0.iconfinder.com/data/icons/google-material-design-3-0/48/ic_playlist_play_48px-512.png" width="28" height="28"></a>
+        <div class="StreamBar">
+          <input
+            type="image"
+            id="channel1"
+            class="playButton paused"
+            src="http://simpleicon.com/wp-content/uploads/play1-64x64.png"
+            alt=""
+            width="32"
+            height="32"
+          />
+          <span>Channel 1: Molasses w/ Toby</span>
+          <span class="location">Dublin</span>
         </div>
-        <div class="imgIcon">
-          <a href="#" id="open-button"><img src="https://www.shareicon.net/data/2016/01/06/699048_database_512x512.png" width="24" height="24"></a>
+        <div class="NowPlaying">
+          <input
+            type="image"
+            id="channel2"
+            class="playButton paused"
+            src="http://simpleicon.com/wp-content/uploads/play1-64x64.png"
+            alt=""
+            width="32"
+            height="32"
+          />
+          <span>Channel 2: </span>
+          <span class="">Totems </span>
+          <span>w/ </span>
+          <span class="">Tweet </span>
+          <span class="location">Lagos</span>
+          <!--<img src="https://www.slantmagazine.com/wp-content/uploads/2005/03/itsmeagain.jpg" alt="" width="32" height="32">-->
         </div>
-        <div class="imgIcon">
-          <img src="https://cdn0.iconfinder.com/data/icons/google-material-design-3-0/48/ic_playlist_play_48px-512.png" width="28" height="28">
+        <div class="icons">
+          <div class="imgIcon">
+            <a href="#" id="openHistory"
+              ><img
+                src="https://cdn0.iconfinder.com/data/icons/google-material-design-3-0/48/ic_playlist_play_48px-512.png"
+                width="28"
+                height="28"
+            /></a>
+          </div>
+          <div class="imgIcon">
+            <a href="#" id="open-button"
+              ><img
+                src="https://www.shareicon.net/data/2016/01/06/699048_database_512x512.png"
+                width="24"
+                height="24"
+            /></a>
+          </div>
+          <div class="imgIcon">
+            <img
+              src="https://cdn0.iconfinder.com/data/icons/google-material-design-3-0/48/ic_playlist_play_48px-512.png"
+              width="28"
+              height="28"
+            />
+          </div>
         </div>
-      </div>
-    </header>
-    <!-- <div class="cloudContent">
+      </header>
+      <!-- <div class="cloudContent">
     </div>-->
-    <footer>
-      <div id="player-container">
-      <div id="play-button-container">
-        <svg x="0px" y="0px" width="300px" height="300px" viewBox="0 0 300 300" fill="#fff">
-          <defs>
-            <path id="circlePath" d=" M 150, 150 m -60, 0 a 60,60 0 0,1 120,0 a 60,60 0 0,1 -120,0 "></path>
-          </defs>
-          <circle cx="100" cy="100" r="50" fill="none" stroke="none">
-          </circle>
-          <g>
-            <use xlink:href="#circlePath" fill="none"></use>
-            <text fill="red" stroke="#fff">
-              <textPath xlink:href="#circlePath" fill="#fff"> • BITTER • CASSAVA </textPath>
-            </text>
-          </g>
-        </svg>
-      </div>
+      <footer>
+        <div id="player-container">
+          <div id="play-button-container">
+            <svg x="0px" y="0px" width="300px" height="300px" viewBox="0 0 300 300" fill="#fff">
+              <defs>
+                <path
+                  id="circlePath"
+                  d=" M 150, 150 m -60, 0 a 60,60 0 0,1 120,0 a 60,60 0 0,1 -120,0 "
+                ></path>
+              </defs>
+              <circle cx="100" cy="100" r="50" fill="none" stroke="none"></circle>
+              <g>
+                <use xlink:href="#circlePath" fill="none"></use>
+                <text fill="red" stroke="#fff">
+                  <textPath xlink:href="#circlePath" fill="#fff">• BITTER • CASSAVA</textPath>
+                </text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </footer>
     </div>
-    </footer>
-  </div>
-</body>
-<script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+  </body>
+  <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 
+  <script type="text/javascript">
+    var modal = document.querySelector('#modal');
+    var modalOverlay = document.querySelector('#modal-overlay');
+    var closeButton = document.querySelector('#close-button');
+    var openButton = document.querySelector('#openHistory');
 
-<script type="text/javascript">
-var modal = document.querySelector("#modal");
-var modalOverlay = document.querySelector("#modal-overlay");
-var closeButton = document.querySelector("#close-button");
-var openButton = document.querySelector("#openHistory");
-
-closeButton.addEventListener("click", function() {
-  modal.classList.toggle("closed");
-  modalOverlay.classList.toggle("closed");
-});
-
-openButton.addEventListener("click", function() {
-  modal.classList.toggle("closed");
-  modalOverlay.classList.toggle("closed");
-  openButton.classList.toggle("bright");
-});
-
-</script>
-<script type="text/javascript">
-
-
-  var socket = io();
-  var uri;
-  var userdeviceID;
-  var isBroadcaster = false;
-
-  // get hash parameters from the url
-
-
-  //var params = getHashParams();
-  //var access_token = params.access_token;
-  //var refresh_token = params.refresh_token;
-  //var error = params.error;
-
-  var refresh_token = Cookies.get("refresh_token");
-  var access_token = Cookies.get("access_token");
-
-  var devicesObj;
-
-
-
-
-  function refreshToken()
-  {
-    $.ajax({
-      url: '/refresh_token',
-      data: {
-        'refresh_token': refresh_token
-      }
-    }).done(function(data) {
-      access_token = data.access_token;
-      Cookies.set("access_token", access_token);
-      console.log("Token Refresh");
-
-      console.log(access_token);
-    })
-    .fail(function(xhr, status, error) {
-      //Ajax request failed.
-      var errorMessage = xhr.status + ': ' + xhr.statusText
-      alert('Error - ' + errorMessage);
-});
-
-  }
-
-  setTimeout(refreshToken, 1000000);
-  getUser();
-
-  //client socket stuff - joining channels, triggers for spotify api requests etc.
-
-  function transferPlayback(){
-    $.ajax({
-      url: 'https://api.spotify.com/v1/me/player',
-      headers: {
-        'Authorization': 'Bearer ' + access_token
-      },
-      contentType: 'application/json',
-      type: 'PUT',
-      data: JSON.stringify({"device_ids":[userdeviceID]}),
-    }).done(function(response)
-    {
-      console.log("Playback successfully transferred");
-
+    closeButton.addEventListener('click', function () {
+      modal.classList.toggle('closed');
+      modalOverlay.classList.toggle('closed');
     });
-  }
 
-
-
-
-
-  function getBroadcastPlayback(channelNum)
-  {
-    $.ajax({
-      url: 'https://api.spotify.com/v1/me/player',
-      headers: {
-        'Authorization': 'Bearer ' + access_token
-      },
-      success: function(response) {
-        console.log(response);
-
-        playbackJson = {
-          imgsrc: response.item.album.images[0].url,
-          songName: response.item.name,
-          artistName: response.item.artists[0].name,
-          albumName: response.item.album.name,
-          progress: response.progress_ms,
-          songLength: response.timestamp,
-          isPlaying: response.is_playing,
-          uri: response.item.uri,
-          deviceID: response.device.id,
-          trackID: response.item.id,
-          channel: channelNum
-        }
-
-        socket.emit("BroadcasterPlayback", playbackJson);
-        console.log(channelNum);
-
-      }
-
-
-
+    openButton.addEventListener('click', function () {
+      modal.classList.toggle('closed');
+      modalOverlay.classList.toggle('closed');
+      openButton.classList.toggle('bright');
     });
-  }
+  </script>
+  <script type="text/javascript">
+    var socket = io();
+    var uri;
+    var userdeviceID;
+    var isBroadcaster = false;
 
+    // get hash parameters from the url
 
-  function getUser()
-  {
-    $.ajax({
-      url: 'https://api.spotify.com/v1/me',
-      headers: {
-        'Authorization': 'Bearer ' + access_token
-      },
-      json: true,
-    }).done(function (response) {
-      console.log("inside user func");
-        if (response.id == ('96pcj22qe7b6uom5ifeia72vb') || response.id == ('1158091471'))
-        {
-          var channel;
-          if(response.id == '96pcj22qe7b6uom5ifeia72vb')
-          {
-            channel = 'channel2';
-          }
-          else{
-            channel = 'channel1';
-          }
-          isBroadcaster = true;
-          setInterval(getBroadcastPlayback, 250, channel);
-        }
-        else
-        {
-          console.log("inside else part func");
-          getUserDeviceInfo()
-        }
+    //var params = getHashParams();
+    //var access_token = params.access_token;
+    //var refresh_token = params.refresh_token;
+    //var error = params.error;
 
-    }).fail(function(xhr, status, error) {
-      //Ajax request failed.
-      if(xhr.status == '401')
-      {
-        console.log("it failed");
+    var refresh_token = Cookies.get('refresh_token');
+    var access_token = Cookies.get('access_token');
 
-        refreshToken();
-        $.ajax(this);
-        return;
-      }
-    });
-  }
+    var devicesObj;
 
+    function refreshToken() {
+      $.ajax({
+        url: '/refresh_token',
+        data: {
+          refresh_token: refresh_token,
+        },
+      })
+        .done(function (data) {
+          access_token = data.access_token;
+          Cookies.set('access_token', access_token);
+          console.log('Token Refresh');
 
-
-$( document ).ajaxError(function( event, jqxhr, settings, exception ) {
-    if ( jqxhr.status == 401 ) {
-      refreshToken();
+          console.log(access_token);
+        })
+        .fail(function (xhr, status, error) {
+          //Ajax request failed.
+          var errorMessage = xhr.status + ': ' + xhr.statusText;
+          alert('Error - ' + errorMessage);
+        });
     }
-});
 
-</script>
+    setTimeout(refreshToken, 1000000);
+    getUser();
+
+    //client socket stuff - joining channels, triggers for spotify api requests etc.
+
+    function transferPlayback() {
+      $.ajax({
+        url: 'https://api.spotify.com/v1/me/player',
+        headers: {
+          Authorization: 'Bearer ' + access_token,
+        },
+        contentType: 'application/json',
+        type: 'PUT',
+        data: JSON.stringify({ device_ids: [userdeviceID] }),
+      }).done(function (response) {
+        console.log('Playback successfully transferred');
+      });
+    }
+
+    function getBroadcastPlayback(channelNum) {
+      $.ajax({
+        url: 'https://api.spotify.com/v1/me/player',
+        headers: {
+          Authorization: 'Bearer ' + access_token,
+        },
+        success: function (response) {
+          console.log(response);
+
+          playbackJson = {
+            imgsrc: response.item.album.images[0].url,
+            songName: response.item.name,
+            artistName: response.item.artists[0].name,
+            albumName: response.item.album.name,
+            progress: response.progress_ms,
+            songLength: response.timestamp,
+            isPlaying: response.is_playing,
+            uri: response.item.uri,
+            deviceID: response.device.id,
+            trackID: response.item.id,
+            channel: channelNum,
+          };
+
+          socket.emit('BroadcasterPlayback', playbackJson);
+          console.log(channelNum);
+        },
+      });
+    }
+
+    function getUser() {
+      $.ajax({
+        url: 'https://api.spotify.com/v1/me',
+        headers: {
+          Authorization: 'Bearer ' + access_token,
+        },
+        json: true,
+      })
+        .done(function (response) {
+          console.log('inside user func');
+          if (response.id == '96pcj22qe7b6uom5ifeia72vb' || response.id == '1158091471') {
+            var channel;
+            if (response.id == '96pcj22qe7b6uom5ifeia72vb') {
+              channel = 'channel2';
+            } else {
+              channel = 'channel1';
+            }
+            isBroadcaster = true;
+            setInterval(getBroadcastPlayback, 250, channel);
+          } else {
+            console.log('inside else part func');
+            getUserDeviceInfo();
+          }
+        })
+        .fail(function (xhr, status, error) {
+          //Ajax request failed.
+          if (xhr.status == '401') {
+            console.log('it failed');
+
+            refreshToken();
+            $.ajax(this);
+            return;
+          }
+        });
+    }
+
+    $(document).ajaxError(function (event, jqxhr, settings, exception) {
+      if (jqxhr.status == 401) {
+        refreshToken();
+      }
+    });
+  </script>
 </html>

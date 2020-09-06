@@ -9,11 +9,12 @@ const app = express();
 const dotenv = require('dotenv');
 const server = require('http').Server(app);
 const io = require('socket.io')(server, {});
-dotenv.config();
+dotenv.config({path: __dirname + '/.env'});
 
 // Spotify Credentials
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
+
 
 // Verify that environment variables are set
 if (

@@ -1,7 +1,10 @@
 .video-background {
   background: #000;
   position: fixed;
-  top: 0; right: 0; bottom: 0; left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: -99;
 }
 .video-foreground,
@@ -22,26 +25,26 @@
   animation: backColour 90000ms 0ms infinite linear;
 }
 
-@keyframes backColour{
-  0%{
+@keyframes backColour {
+  0% {
     filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(180deg);
   }
-  16%{
+  16% {
     filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(240deg);
   }
-  32%{
+  32% {
     filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(300deg);
   }
-  48%{
+  48% {
     filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(360deg);
   }
-  64%{
+  64% {
     filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(420deg);
   }
-  80%{
+  80% {
     filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(480deg);
   }
-  100%{
+  100% {
     filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(540deg);
   }
 }
@@ -53,7 +56,8 @@
   padding: 0 4px;
 }
 
-.column img {
+.column img,
+video {
   margin-bottom: 8px;
   vertical-align: middle;
   width: 100%;
@@ -65,28 +69,29 @@
     max-width: 50%;
   }
 
-  .NowPlaying, .StreamBar{
+  .NowPlaying,
+  .StreamBar {
     width: 100%;
   }
 
-  .header-container{
+  .header-container {
     display: inline-block;
-    border:none;
+    border: none;
   }
 
-  .Live{
+  .Live {
     display: none;
   }
 
-  .icons{
-    position: fixed
-    right:0;
+  .icons {
+    position: fixed;
+    right: 0;
     border: 1px solid;
     width: 100px;
   }
 
-  .imgIcon{
-    height:28px;
+  .imgIcon {
+    height: 28px;
     border: none;
   }
 }
@@ -97,32 +102,31 @@
     max-width: 33%;
   }
 
-  .NowPlaying, .StreamBar{
+  .NowPlaying,
+  .StreamBar {
     width: 100%;
   }
 
-  .header-container{
+  .header-container {
     display: inline-block;
-    border:1px solid;
+    border: 1px solid;
   }
 
-  .Live{
+  .Live {
     display: none;
   }
 
-  .icons{
+  .icons {
     position: fixed;
-    right:0;
+    right: 0;
     border: none;
     width: 100px;
   }
 
-  .imgIcon{
-    height:28px;
+  .imgIcon {
+    height: 28px;
     border: 1px solid white;
   }
-
-
 }
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
@@ -132,28 +136,29 @@
     max-width: 100%;
   }
 
-  .NowPlaying, .StreamBar{
+  .NowPlaying,
+  .StreamBar {
     width: 100%;
   }
 
-  .header-container{
+  .header-container {
     display: inline-block;
-    border:1px solid;
+    border: 1px solid;
   }
 
-  .Live{
+  .Live {
     display: none;
   }
 
-  .icons{
-    position: fixed
-    right:0;
+  .icons {
+    position: fixed;
+    right: 0;
     border: none;
     width: 100px;
   }
 
-  .imgIcon{
-    height:28px;
+  .imgIcon {
+    height: 28px;
     border: 1px solid white;
     width: 100px;
   }
