@@ -9,6 +9,7 @@ const app = express();
 const dotenv = require('dotenv');
 const server = require('http').Server(app);
 const io = require('socket.io')(server, {});
+const compression = require('compression');
 dotenv.config({ path: __dirname + '/.env' });
 
 // Spotify Credentials
@@ -38,7 +39,8 @@ app.use(cookieParser());
 app
   .use(express.static(path.join(__dirname, '/public')))
   .use(cors())
-  .use(cookieParser());
+  .use(cookieParser())
+  .use(compression());
 
 const generateRandomString = function (length) {
   let text = '';
