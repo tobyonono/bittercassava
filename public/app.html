@@ -56,7 +56,7 @@
         </div>
       </div>
       <div class="poetry closed" id="poetry">
-        <a class="close-button" href="#" id="poetryCloseButton">
+        <a class="poetry-close-button" href="#" id="poetryCloseButton">
           <img
             class="playButton"
             src="https://cdn.pixabay.com/photo/2014/09/26/10/45/delete-462216_1280.png"
@@ -422,7 +422,7 @@
         data: JSON.stringify({ artist: data.artistName, song: data.songName }),
 
         success: function(response) {
-          generateBlackout(response)
+          generateBlackout(response, data.artistName, data.songName)
           console.log(response.split(/\r\n|\r|\n/));
         }
       });
@@ -497,7 +497,7 @@
       });
     }
 
-    function generateBlackout(lyrics)
+    function generateBlackout(lyrics, artistName, songName)
     {
       let poem = lyrics;
       let poem_lines = poem.split(/\r\n|\r|\n/);
@@ -521,7 +521,7 @@
               "</span>";
           }
 
-          //poem_lines[i] = words_in_line.join(" ")
+
           poem_lines[i] = convertBackToString(words_in_line);
         }
 
@@ -531,8 +531,8 @@
        }
 
        window.setTimeout(function() {
-          $("#title").html("<p>" + "Title" + "</p>");
-          $("#author").html("<p>" + "Author" + "</p>");
+          $("#title").html("<p>" + "Title: " + songName + "</p>");
+          $("#author").html("<p>" + "Author: " + artistName + "</p>");
           $("#poem").html("<p>" + poem_text + "</p>");
         }, 300);
 

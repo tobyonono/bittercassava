@@ -216,7 +216,7 @@ h1 {
 }
 
 
-.modal .close-button, .poetry .poetryCloseButton {
+.modal .close-button{
   position: absolute;
 
   /* don't need to go crazy with z-index here, just sits over .modal-guts */
