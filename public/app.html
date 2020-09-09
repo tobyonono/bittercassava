@@ -31,6 +31,7 @@
     <link href="/stylesheets/footer.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/header.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/video.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/poetry.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <div class="contentContainer">
@@ -53,6 +54,26 @@
             <ol class="recentlyPlayed"></ol>
           </div>
         </div>
+      </div>
+      <div class="poetry closed" id="poetry">
+        <a class="close-button" href="#" id="poetryCloseButton">
+          <img
+            class="playButton"
+            src="https://cdn.pixabay.com/photo/2014/09/26/10/45/delete-462216_1280.png"
+            alt=""
+            width="20"
+            height="20"
+          />
+        </a>
+        <div class="poetry-guts">
+          <div>
+            <div id="title" class="title"></div>
+            <div id="author" class="author"></div>
+            <div id="poem" class="poem_text"></div>
+
+          </div>
+        </div>
+
       </div>
       <div class="video-background">
         <div class="video-foreground">
@@ -151,7 +172,7 @@
             /></a>
           </div>
           <div class="imgIcon">
-            <a href="#" id="open-button"
+            <a href="#" id="openPoetry"
               ><img
                 src="https://www.shareicon.net/data/2016/01/06/699048_database_512x512.png"
                 width="24"
@@ -202,8 +223,19 @@
     var closeButton = document.querySelector('#close-button');
     var openButton = document.querySelector('#openHistory');
 
+    var poetry = document.querySelector('#poetry');
+    var poetryCloseButton = document.querySelector('#poetryCloseButton');
+    var poetryOpenButton = document.querySelector('#openPoetry');
+
+
+
     closeButton.addEventListener('click', function () {
       modal.classList.toggle('closed');
+      modalOverlay.classList.toggle('closed');
+    });
+
+    poetryCloseButton.addEventListener('click', function () {
+      poetry.classList.toggle('closed');
       modalOverlay.classList.toggle('closed');
     });
 
@@ -211,6 +243,12 @@
       modal.classList.toggle('closed');
       modalOverlay.classList.toggle('closed');
       openButton.classList.toggle('bright');
+    });
+
+    poetryOpenButton.addEventListener('click', function () {
+      poetry.classList.toggle('closed');
+      modalOverlay.classList.toggle('closed');
+      poetryOpenButton.classList.toggle('bright');
     });
   </script>
   <script type="text/javascript">
@@ -375,6 +413,19 @@
           );
         },
       });
+
+      $.ajax({
+        url: '/getLyrics',
+        method:'POST',
+        dataType: 'json',
+        contentType: "application/json",
+        data: JSON.stringify({ artist: data.artistName, song: data.songName }),
+
+        success: function(response) {
+          generateBlackout(response)
+          console.log(response.split(/\r\n|\r|\n/));
+        }
+      });
     });
 
     socket.on('pauseSong', function (data) {
@@ -403,6 +454,11 @@
         data: '',
         success: function (response) {},
       });
+    });
+
+    socket.on('showLyrics', function (data) {
+      console.log(data);
+      console.log("we're in");
     });
 
     function getUserDeviceInfo() {
@@ -440,6 +496,108 @@
         });
       });
     }
+
+    function generateBlackout(lyrics)
+    {
+      let poem = lyrics;
+      let poem_lines = poem.split(/\r\n|\r|\n/);
+      let poem_num_lines = poem.split(/\r\n|\r|\n/).length;
+      let poem_text = [];
+
+      for (var i = 0; i < poem_num_lines; i++) {
+          // deconstruct string to array of words
+          let words_in_line = poem_lines[i].split(" ");
+          var num_words = words_in_line.length;
+
+          // get random # of words to hide
+          var index_of_words_to_hide = getWhichWordstoBlackout(num_words);
+
+          // add blackout to words
+          for (var j = 0; j < index_of_words_to_hide.length; j++) {
+            words_in_line[index_of_words_to_hide[j]] =
+              '<span class="blackout">' +
+              words_in_line[index_of_words_to_hide[j]] +
+              "</span>";
+          }
+
+          //poem_lines[i] = words_in_line.join(" ")
+          poem_lines[i] = convertBackToString(words_in_line);
+        }
+
+        // format all poem text into string with line breaks
+       for (var i = 0; i < poem_num_lines; i++) {
+         poem_text += poem_lines[i] + "<br>";
+       }
+
+       window.setTimeout(function() {
+          $("#title").html("<p>" + "Title" + "</p>");
+          $("#author").html("<p>" + "Author" + "</p>");
+          $("#poem").html("<p>" + poem_text + "</p>");
+        }, 300);
+
+        return false;
+
+    };
+
+    function convertBackToString(array_of_words) {
+      let poem_text = "";
+
+      for (let i = 0; i < array_of_words.length - 1; i++) {
+        poem_text += array_of_words[i];
+
+        // if the current word and the next word start with span, it means the space in between
+        // should be a span
+        if (
+          array_of_words[i].startsWith("<s") &&
+          array_of_words[i + 1].startsWith("<s")
+        ) {
+          poem_text += '<span class="blackout"> </span>';
+        } else {
+          poem_text += " ";
+        }
+      }
+      return poem_text;
+    }
+
+    function getWhichWordstoBlackout(num_words_in_sentence) {
+      const MIN_PERECENT_OF_WORDS_TO_BLACKOUT = 0.8;
+
+      // lets make sure its at least 80% of the sentence
+      let number_of_words_to_hide = getRandomInt(
+        Math.floor(num_words_in_sentence * MIN_PERECENT_OF_WORDS_TO_BLACKOUT),
+        num_words_in_sentence
+      );
+
+      // loop through number of words to hide until you have enough
+      let index_of_words_to_hide = [];
+
+      for (
+        let i = 0;
+        index_of_words_to_hide.length < number_of_words_to_hide;
+        i++
+      ) {
+        index_of_words_to_hide.push(getRandomInt(0, num_words_in_sentence));
+
+        // set everytime to make sure numbers stay unique
+        index_of_words_to_hide = [...new Set(index_of_words_to_hide)];
+      }
+
+      return index_of_words_to_hide;
+    }
+
+    function getRandomInt(min, max) {
+    // lets make sure they're integers
+    min = Math.ceil(min);
+    max = Math.floor(max);
+
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  function getRandomLineNumber() {
+    return getRandomInt(2, 10);
+  }
+
+
 
     document.getElementById('channel1').addEventListener('click', function () {
       if ($(this).hasClass('paused')) {

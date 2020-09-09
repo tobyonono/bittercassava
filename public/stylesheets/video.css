@@ -1,3 +1,26 @@
+.loader {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  font-size: 15px;
+  background: black;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Cousine', monospace;
+  color: white;
+  padding-top: 27%;
+}
+
+.loader span {
+  -webkit-animation: pulsate 1.5s ease-out;
+  -webkit-animation-iteration-count: infinite;
+  opacity: 0;
+  top: 50%;
+}
+
 .video-background {
   background: #000;
   position: fixed;

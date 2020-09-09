@@ -10,11 +10,16 @@ const dotenv = require('dotenv');
 const server = require('http').Server(app);
 const io = require('socket.io')(server, {});
 const compression = require('compression');
+const apigenius = require('genius-api');
+const cheerio = require('cheerio');
 dotenv.config({ path: __dirname + '/.env' });
 
 // Spotify Credentials
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
+
+// Rap Genius Credentials
+const genius = new apigenius(process.env.GENIUS_ACCESS_TOKEN);
 
 // Verify that environment variables are set
 if (
@@ -199,6 +204,35 @@ app.get('/refresh_token', function (req, res) {
   });
 });
 
+app.post('/getLyrics', function (req, res) {
+  genius.search(req.body.artist + ' ' + req.body.song).then(function (response) {
+    let songUrl = response.hits[0].result.url;
+
+    request(songUrl, function (error, response, body) {
+      const $ = cheerio.load(body);
+      lyrics = $('.lyrics').text();
+
+      /*the div changing the lyrics doesnt have a consistent id
+          when it doesnt have class="lyrics" it has Lyrics in a css class applied to it
+          formatting needs to be applied to the text when retrieved in this way to preserve line breaks*/
+      if (lyrics === '') {
+        $('div[class*="Lyrics__Container"]').find('br').replaceWith('\n');
+        lyrics = $('div[class*="Lyrics__Container"]').text();
+      }
+      lyrics = lyrics.replace(/ *\[[^\]]*]/g, '');
+      //console.log(lyrics + "In lyrics func");
+      console.log(lyrics);
+      res.json(lyrics);
+    });
+  });
+});
+
+//function to get lyrics for song using Genius API;
+
+
+
+
+
 /* socket stuff that handles the playback info from the broadcasting clients + publishes
    them to non broadcasters depending on what room they are in. Also handles joining + leaving rooms
    which are the channels on the frontend
@@ -211,6 +245,7 @@ io.sockets.on('connection', function (socket) {
   socket.on('join', function (data) {
     socket.join(data);
     socket.emit('tapIn', latestInfo[data][0]);
+
   });
 
   socket.on('leave', function (data) {

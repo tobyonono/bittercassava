@@ -16,11 +16,13 @@
       href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap"
       rel="stylesheet"
     />
+
     <link href="/stylesheets/footer.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/header.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/video.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
+    <div class="loader"><span>Open Spotify</span></div>
     <div class="contentContainer">
       <div class="modal-overlay closed" id="modal-overlay"></div>
       <div class="modal closed" id="modal">
@@ -384,6 +386,17 @@
       if (jqxhr.status == 401) {
         refreshToken();
       }
+    });
+  </script>
+  <script type="text/javascript">
+    $(window).load(function () {
+      document.getElementsByClassName('.loader');
+      if ($(this).hasClass('secondPhase')) {
+        $('.loader span').text('Stay Wholesome');
+      }
+
+      $('.loader').delay(2500).fadeOut();
+      $(this).toggleClass('secondPhase');
     });
   </script>
 </html>

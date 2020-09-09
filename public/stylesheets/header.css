@@ -134,7 +134,7 @@ input{
 
 
 
-.modal {
+.modal, .poetry {
   /* This way it could be display flex or grid or whatever also. */
   display: block;
 
@@ -216,7 +216,7 @@ h1 {
 }
 
 
-.modal .close-button {
+.modal .close-button, .poetry .poetryCloseButton {
   position: absolute;
 
   /* don't need to go crazy with z-index here, just sits over .modal-guts */

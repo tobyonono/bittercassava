@@ -1,0 +1,195 @@
+@keyframes button_move_front {
+  from {
+    left: 5px;
+    top: 5px;
+  }
+  to {
+    left: 10px;
+    top: 10px;
+  }
+}
+
+@keyframes button_move_back {
+  from {
+    left: 12px;
+    top: 12px;
+  }
+  to {
+    left: 22px;
+    top: 22px;
+  }
+}
+
+@keyframes spin_it {
+  0% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 72px;
+    height: 72px;
+    opacity: 0;
+  }
+}
+
+/* Styling */
+
+
+p {
+  margin: 0;
+  background-color: #F1ECE7;
+  color: red;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  letter-spacing: 0.05em;
+  font-size: 16px;
+}
+
+p::selection {
+  color: red;
+  background-color: red;
+}
+
+.header {
+  text-align: center;
+  border-bottom: 1px solid red;
+  color: red;
+  width: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  padding: 15px 10px;
+  font-size: 20px;
+  letter-spacing: 0.05em;
+}
+
+
+@media only screen and (min-width: 600px) {
+  .container {
+    margin: 50px auto;
+    width: 500px;
+  }
+}
+
+.title {
+  font-weight: bold;
+}
+
+.author {
+  font-style: italic;
+  margin-top: 2px;
+}
+
+.poem_text {
+  margin-top: 20px;
+  line-height: 1.5;
+  color: red;
+}
+
+.blackout {
+  background-color: red;
+  margin: 0 -0.1px;
+}
+
+/* Button Styles */
+
+.button:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  left: 5px;
+  top: 5px;
+  border: 2px solid red;
+  z-index: -1;
+  position: absolute;
+  background-color: #f1ece7;
+}
+
+.button {
+  border: 2px solid red;
+  letter-spacing: 0.1em;
+  padding: 10px 10px;
+  text-align: center;
+  font-size: 20px;
+  position: relative;
+  background-color: #f1ece7;
+  cursor: pointer;
+  margin-top: 50px;
+  -webkit-tap-highlight-color: #FBAFAC;
+  -webkit-tap-highlight-color: #FBAFAC;
+  width: 100%;
+  color: red;
+}
+
+.button:after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  left: 12px;
+  top: 12px;
+  border: 2px solid red;
+  z-index: -2;
+  position: absolute;
+  background-color: #f1ece7;
+}
+
+.button:hover:before {
+  animation: button_move_front 0.15s ease-in 1;
+  animation-fill-mode: forwards;
+}
+
+.button:hover:after {
+  animation: button_move_back 0.15s ease-in 1;
+  animation-fill-mode: forwards;
+}
+
+.button:active {
+  background-color: #FBAFAC;
+}
+
+/* Footer */
+
+
+
+a {
+  color: red;
+  text-decoration: none;
+  transition: color 150ms ease-in-out;
+  margin-bottom: 2px;
+  border-bottom: 2px solid;
+}
+
+a:hover {
+  position: relative;
+  top: -3px;
+  padding-bottom: 3px;
+}
+
+/* Spinner */
+.spinner_wrapper {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.spinner {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.spinner div {
+  position: absolute;
+  border: 4px solid red;
+  opacity: 1;
+  border-radius: 50%;
+  animation: spin_it 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.spinner div:nth-child(2) {
+  animation-delay: -0.5s;
+}
