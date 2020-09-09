@@ -174,9 +174,9 @@
           <div class="imgIcon">
             <a href="#" id="openPoetry"
               ><img
-                src="https://www.shareicon.net/data/2016/01/06/699048_database_512x512.png"
-                width="24"
-                height="24"
+                src="https://static.thenounproject.com/png/1053373-200.png"
+                width="28"
+                height="28"
             /></a>
           </div>
           <div class="imgIcon">
@@ -501,13 +501,14 @@
     {
       let poem = lyrics;
       let poem_lines = poem.split(/\r\n|\r|\n/);
-      let poem_num_lines = poem.split(/\r\n|\r|\n/).length;
+      poem_lines = poem_lines.filter(item => item);
+      let poem_num_lines = poem_lines.length;
       let poem_text = [];
 
       for (var i = 0; i < poem_num_lines; i++) {
           // deconstruct string to array of words
           let words_in_line = poem_lines[i].split(" ");
-          var num_words = words_in_line.length;
+          var num_words = words_in_line.length + 1;
 
           // get random # of words to hide
           var index_of_words_to_hide = getWhichWordstoBlackout(num_words);
