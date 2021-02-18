@@ -9,6 +9,8 @@ body{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior-y: contain;
+  animation: backColour 90000ms 0ms infinite linear;
+
 }
 
 footer {
@@ -134,5 +136,29 @@ svg:not(:root) {
   }
   100% {
     transform: rotate(0);
+  }
+}
+
+@keyframes backColour {
+  0% {
+
+  }
+  16% {
+    background: red;
+  }
+  32% {
+    background: saddlebrown;
+  }
+  48% {
+    background: orange;
+  }
+  64% {
+    background: green;
+  }
+  80% {
+    background:blue;
+  }
+  100% {
+    background: beige;
   }
 }

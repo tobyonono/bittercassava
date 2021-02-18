@@ -10,16 +10,25 @@ const dotenv = require('dotenv');
 const server = require('http').Server(app);
 const io = require('socket.io')(server, {});
 const compression = require('compression');
-const apigenius = require('genius-api');
+//const apigenius = require('genius-api');
+const genius = require('genius-lyrics-api');
 const cheerio = require('cheerio');
 dotenv.config({ path: __dirname + '/.env' });
+
+//helpers
+const helper = require('./helperFuncs/helpers');
 
 // Spotify Credentials
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
-// Rap Genius Credentials
-const genius = new apigenius(process.env.GENIUS_ACCESS_TOKEN);
+//broadcaster spotify ids
+
+const BROADCASTER_ONE = process.env.BROADCASTER_ONE
+const BROADCASTER_TWO = process.env.BROADCASTER_TWO
+
+
+
 
 // Verify that environment variables are set
 if (
@@ -47,15 +56,7 @@ app
   .use(cookieParser())
   .use(compression());
 
-const generateRandomString = function (length) {
-  let text = '';
-  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-  for (let i = 0; i < length; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-  return text;
-};
 
 const stateKey = 'spotify_auth_state';
 
@@ -65,7 +66,8 @@ app.get('/', function (req, res) {
 });
 
 app.get('/login', function (req, res) {
-  const state = generateRandomString(16);
+  const state = helper.generateRandomString(16);
+
   res.cookie(stateKey, state);
 
   // Authorise with Spotify
@@ -151,7 +153,7 @@ app.get('/callback', function (req, res) {
 
         request.get(options, function (error, response, body) {
           if (!error && response.statusCode === 200) {
-            if (body.id === '96pcj22qe7b6uom5ifeia72vb' || body.id === '1158091471') {
+            if (body.id === BROADCASTER_ONE) {
               res.redirect('/broadcaster');
             } else {
               res.redirect('/home');
@@ -205,32 +207,16 @@ app.get('/refresh_token', function (req, res) {
 });
 
 app.post('/getLyrics', function (req, res) {
-  genius.search(req.body.artist + ' ' + req.body.song).then(function (response) {
-    let songUrl = response.hits[0].result.url;
 
-    request(songUrl, function (error, response, body) {
-      const $ = cheerio.load(body);
-      lyrics = $('.lyrics').text();
+  const genOptions = {
+    apiKey: process.env.GENIUS_ACCESS_TOKEN,
+    title: req.body.song,
+    artist: req.body.artist,
+    optimizeQuery: true
+  };
 
-      /*the div changing the lyrics doesnt have a consistent id
-          when it doesnt have class="lyrics" it has Lyrics in a css class applied to it
-          formatting needs to be applied to the text when retrieved in this way to preserve line breaks*/
-      if (lyrics === '') {
-        $('div[class*="Lyrics__Container"]').find('br').replaceWith('\n');
-        lyrics = $('div[class*="Lyrics__Container"]').text();
-      }
-      lyrics = lyrics.replace(/ *\[[^\]]*]/g, '');
-      //console.log(lyrics + "In lyrics func");
-      console.log(lyrics);
-      res.json(lyrics);
-    });
-  });
+  genius.getLyrics(genOptions).then((lyrics) => res.json(lyrics.replace(/ *\[[^\]]*]/g, '')));
 });
-
-//function to get lyrics for song using Genius API;
-
-
-
 
 
 /* socket stuff that handles the playback info from the broadcasting clients + publishes
@@ -258,17 +244,22 @@ io.sockets.on('connection', function (socket) {
     //need latestInfo for users who join mid song. playbackJson is for comparison to know when to trigger an api call for the user
     latestInfo[data.channel][0] = data;
 
-    // This is a little messy! TODO: clean it up with some refactoring/comments
+    // If statements to check state of broadcaster & user playback
+    // 1st - Check if the playback array is empty, indicating user has just joined then play song and store song info for that channel
     if (playbackJson[data.channel].length === 0) {
       playbackJson[data.channel].push(data);
       console.log(playbackJson);
       if (playbackJson[data.channel][0].isPlaying == true) {
         socket.to(data.channel).emit('playSong', data);
       }
-    } else if (playbackJson[data.channel][0].trackID !== data.trackID) {
+    }
+    // 2nd - Compare the latest info received from socket with what is in the latestInfo array. If different, song has changed
+    else if (playbackJson[data.channel][0].trackID !== data.trackID) {
       socket.to(data.channel).emit('playSong', data);
       playbackJson[data.channel][0] = data;
-    } else if (playbackJson[data.channel][0].trackID === data.trackID) {
+    }
+    // 3rd - Logic to decide whether song has paused/resumed and what action we need to take.
+    else if (playbackJson[data.channel][0].trackID === data.trackID) {
       if (data.isPlaying === true && playbackJson[data.channel][0].isPlaying === false) {
         socket.to(data.channel).emit('resumeSong', data);
         playbackJson[data.channel][0] = data;
