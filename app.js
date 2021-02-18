@@ -10,7 +10,6 @@ const dotenv = require('dotenv');
 const server = require('http').Server(app);
 const io = require('socket.io')(server, {});
 const compression = require('compression');
-//const apigenius = require('genius-api');
 const genius = require('genius-lyrics-api');
 const cheerio = require('cheerio');
 dotenv.config({ path: __dirname + '/.env' });
