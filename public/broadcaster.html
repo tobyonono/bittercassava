@@ -242,24 +242,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 
-  <script type="text/javascript">
-    var modal = document.querySelector('#modal');
-    var modalOverlay = document.querySelector('#modal-overlay');
-    var closeButton = document.querySelector('#close-button');
-    var openButton = document.querySelector('#openHistory');
-
-    closeButton.addEventListener('click', function () {
-      modal.classList.toggle('closed');
-      modalOverlay.classList.toggle('closed');
-    });
-
-    openButton.addEventListener('click', function () {
-      modal.classList.toggle('closed');
-      modalOverlay.classList.toggle('closed');
-      openButton.classList.toggle('bright');
-    });
-  </script>
-  <script type="text/javascript">
+  <script src ="scripts/broadcasterNav.js" type="text/javascript"> </script>
+  <script src = "scripts/broadcaster.js" type="text/javascript">
+  /*
     var socket = io();
     var uri;
     var userdeviceID;
@@ -274,6 +259,8 @@
 
     var refresh_token = Cookies.get('refresh_token');
     var access_token = Cookies.get('access_token');
+    var channel = Cookies.get('channelNum');
+
 
     var devicesObj;
 
@@ -357,7 +344,7 @@
         .done(function (response) {
           console.log('inside user func');
           if (response.id == '96pcj22qe7b6uom5ifeia72vb' || response.id == '1158091471') {
-            var channel;
+            //var channel;
             if (response.id == '96pcj22qe7b6uom5ifeia72vb') {
               channel = 'channel2';
             } else {
@@ -387,6 +374,7 @@
         refreshToken();
       }
     });
+    */
   </script>
   <script type="text/javascript">
     $(window).load(function () {

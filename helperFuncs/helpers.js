@@ -1,4 +1,4 @@
-const generateRandomString = function (length) {
+exports.generateRandomString = function (length) {
   let text = '';
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -8,4 +8,12 @@ const generateRandomString = function (length) {
   return text;
 };
 
-module.exports = {generateRandomString};
+exports.getRandomInt = (min, max) => {
+// lets make sure they're integers
+min = Math.ceil(min);
+max = Math.floor(max);
+
+return Math.floor(Math.random() * (max - min)) + min;
+}
+
+exports.getRandomLineNumber = () => getRandomInt(2, 10);

@@ -61,7 +61,10 @@ const stateKey = 'spotify_auth_state';
 
 // API Endpoints
 app.get('/', function (req, res) {
+  // stuff for immediate redirect in future
+  const accountCheck = req.cookies[broadcaster] || null;
   res.render('index.html');
+
 });
 
 app.get('/login', function (req, res) {
@@ -153,21 +156,31 @@ app.get('/callback', function (req, res) {
         request.get(options, function (error, response, body) {
           if (!error && response.statusCode === 200) {
             if (body.id === BROADCASTER_ONE) {
+              res.cookie('broadcaster', true, {
+                maxAge: 30 * 24 * 3600 * 1000,
+              });
+              res.cookie('channelNum', 'channel1', {
+                maxAge: 30 * 24 * 3600 * 1000,
+              });
+              res.redirect('/home');
+            } else if (body.id === BROADCASTER_TWO) {
+              res.cookie('broadcaster', true, {
+                maxAge: 30 * 24 * 3600 * 1000,
+              });
+              res.cookie('channelNum', 'channel2', {
+                maxAge: 30 * 24 * 3600 * 1000,
+              });
               res.redirect('/broadcaster');
-            } else {
+            }
+            else {
+              res.cookie('broadcaster', false, {
+                maxAge: 30 * 24 * 3600 * 1000,
+              });
               res.redirect('/home');
             }
           }
         });
 
-        // use the access token to access the Spotify Web API
-
-        // we can also pass the token to the browser to make requests from there
-        /*
-        res.redirect('/home/' + querystring.stringify({
-          "isBroadcaster": isBroadcaster
-      }));
-      */
       } else {
         res.redirect(
           '/#' +
