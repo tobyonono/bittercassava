@@ -1,6 +1,6 @@
 import { generateBlackout } from './blackoutPoetry.js';
 const socket = io();
-const access_token = Cookies.get('access_token');
+let access_token = Cookies.get('access_token');
 
 let refresh_token = Cookies.get('refresh_token');
 let userdeviceID;
@@ -49,7 +49,7 @@ const leaveChannel = channelNum => socket.emit('leave', channelNum);
 
 socket.on('tapIn', data => {
   //transferPlayback();
-
+  console.log(data.uri + "tapIn....");
   $.ajax({
     url: 'https://api.spotify.com/v1/me/player/play',
     contentType: 'application/json',
@@ -143,7 +143,8 @@ socket.on('playSong', data => {
     data: JSON.stringify({ artist: data.artistName, song: data.songName }),
 
     success: function(response) {
-      generateBlackout(response, data.artistName, data.songName)
+      generateBlackout(response, data.artistName, data.songName);
+      console.log(response);
       console.log(response.split(/\r\n|\r|\n/));
     }
   });
@@ -160,6 +161,21 @@ socket.on('pauseSong', data => {
     },
     data: JSON.stringify({ device_id: userdeviceID }),
     success: function (response) {},
+  });
+});
+
+socket.on('queueSong', data => {
+  console.log(data.uri + " " + userdeviceID + " In queue");
+
+
+  $.ajax({
+    url: 'https://api.spotify.com/v1/me/player/queue?' + $.param({ uri: data.uri, device_id: userdeviceID }),
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + access_token,
+    },
+    success: function (response) {console.log("song queued")},
+
   });
 });
 

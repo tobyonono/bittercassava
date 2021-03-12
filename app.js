@@ -219,7 +219,7 @@ app.get('/refresh_token', function (req, res) {
 });
 
 app.post('/getLyrics', function (req, res) {
-
+console.log("Inside getLyrics");
   const genOptions = {
     apiKey: process.env.GENIUS_ACCESS_TOKEN,
     title: req.body.song,
@@ -267,8 +267,9 @@ io.sockets.on('connection', function (socket) {
     }
     // 2nd - Compare the latest info received from socket with what is in the latestInfo array. If different, song has changed
     else if (playbackJson[data.channel][0].trackID !== data.trackID) {
-      socket.to(data.channel).emit('playSong', data);
+      socket.to(data.channel).emit('queueSong', data);
       playbackJson[data.channel][0] = data;
+      console.log("Queue Data..." + playbackJson[data.channel][0]);
     }
     // 3rd - Logic to decide whether song has paused/resumed and what action we need to take.
     else if (playbackJson[data.channel][0].trackID === data.trackID) {

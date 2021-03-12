@@ -1,10 +1,8 @@
-const poetry = require('./blackoutPoetry');
 const socket = io();
-const access_token = Cookies.get('access_token');
+let access_token = Cookies.get('access_token');
 const channel = Cookies.get('channelNum');
 
 let refresh_token = Cookies.get('refresh_token');
-
 
 const refreshToken = () => {
   $.ajax({

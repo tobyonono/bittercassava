@@ -5,6 +5,14 @@
   display: block;
 }
 
+.contentContainer button{
+    border: none;
+    background: none;
+    margin: auto;
+    outline: none;
+
+}
+
 .cloudContent{
   min-height: 100%;
 }
@@ -94,6 +102,8 @@ input{
   display: block;
   margin: auto;
 }
+
+
 .location{
   position: absolute;
   right: 0;

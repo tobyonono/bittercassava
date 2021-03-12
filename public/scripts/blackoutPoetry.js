@@ -1,4 +1,52 @@
-import {getRandomInt, getRandomLineNumber} from '../helperFuncs/helpers';
+import {getRandomInt, getRandomLineNumber} from './helperfuncs.js';
+
+
+const getWhichWordstoBlackout = num_words_in_sentence => {
+  const MIN_PERECENT_OF_WORDS_TO_BLACKOUT = 0.8;
+
+  // lets make sure its at least 80% of the sentence
+  let number_of_words_to_hide = getRandomInt(
+    Math.floor(num_words_in_sentence * MIN_PERECENT_OF_WORDS_TO_BLACKOUT),
+    num_words_in_sentence
+  );
+
+  // loop through number of words to hide until you have enough
+  let index_of_words_to_hide = [];
+
+  for (
+    let i = 0;
+    index_of_words_to_hide.length < number_of_words_to_hide;
+    i++
+  ) {
+    index_of_words_to_hide.push(getRandomInt(0, num_words_in_sentence));
+
+    // set everytime to make sure numbers stay unique
+    index_of_words_to_hide = [...new Set(index_of_words_to_hide)];
+  }
+
+  return index_of_words_to_hide;
+}
+
+
+const convertBackToString = array_of_words => {
+  let poem_text = "";
+
+  for (let i = 0; i < array_of_words.length - 1; i++) {
+    poem_text += array_of_words[i];
+
+    // if the current word and the next word start with span, it means the space in between
+    // should be a span
+    if (
+      array_of_words[i].startsWith("<s") &&
+      array_of_words[i + 1].startsWith("<s")
+    ) {
+      poem_text += '<span class="blackout"> </span>';
+    } else {
+      poem_text += " ";
+    }
+  }
+  return poem_text;
+}
 
 const generateBlackout = (lyrics, artistName, songName) => {
   let poem = lyrics;
@@ -42,50 +90,6 @@ const generateBlackout = (lyrics, artistName, songName) => {
 
 };
 
-const convertBackToString = array_of_words => {
-  let poem_text = "";
 
-  for (let i = 0; i < array_of_words.length - 1; i++) {
-    poem_text += array_of_words[i];
-
-    // if the current word and the next word start with span, it means the space in between
-    // should be a span
-    if (
-      array_of_words[i].startsWith("<s") &&
-      array_of_words[i + 1].startsWith("<s")
-    ) {
-      poem_text += '<span class="blackout"> </span>';
-    } else {
-      poem_text += " ";
-    }
-  }
-  return poem_text;
-}
-
-const getWhichWordstoBlackout = num_words_in_sentence => {
-  const MIN_PERECENT_OF_WORDS_TO_BLACKOUT = 0.8;
-
-  // lets make sure its at least 80% of the sentence
-  let number_of_words_to_hide = helpers.getRandomInt(
-    Math.floor(num_words_in_sentence * MIN_PERECENT_OF_WORDS_TO_BLACKOUT),
-    num_words_in_sentence
-  );
-
-  // loop through number of words to hide until you have enough
-  let index_of_words_to_hide = [];
-
-  for (
-    let i = 0;
-    index_of_words_to_hide.length < number_of_words_to_hide;
-    i++
-  ) {
-    index_of_words_to_hide.push(helpers.getRandomInt(0, num_words_in_sentence));
-
-    // set everytime to make sure numbers stay unique
-    index_of_words_to_hide = [...new Set(index_of_words_to_hide)];
-  }
-
-  return index_of_words_to_hide;
-}
 
 export {generateBlackout};
