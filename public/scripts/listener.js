@@ -166,8 +166,6 @@ socket.on('pauseSong', data => {
 
 socket.on('queueSong', data => {
   console.log(data.uri + " " + userdeviceID + " In queue");
-
-
   $.ajax({
     url: 'https://api.spotify.com/v1/me/player/queue?' + $.param({ uri: data.uri, device_id: userdeviceID }),
     method: 'POST',
