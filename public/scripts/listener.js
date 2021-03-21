@@ -43,6 +43,21 @@ const transferPlayback = () => {
   });
 }
 
+const getCurrentlyPlaying = () =>
+{
+  $.ajax({
+    url: 'https://api.spotify.com/v1/me/player',
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer ' + access_token,
+    },
+    success: function (response) {
+      console.log(response.is_playing);
+    },
+
+  });
+}
+
 const joinChannel = channelNum => socket.emit('join', channelNum);
 const leaveChannel = channelNum => socket.emit('leave', channelNum);
 
@@ -167,12 +182,42 @@ socket.on('pauseSong', data => {
 socket.on('queueSong', data => {
   console.log(data.uri + " " + userdeviceID + " In queue");
   $.ajax({
-    url: 'https://api.spotify.com/v1/me/player/queue?' + $.param({ uri: data.uri, device_id: userdeviceID }),
+    url: 'https://api.spotify.com/v1/me/player/queue?' + $.param({ uri: data.uri}),
     method: 'POST',
     headers: {
       Authorization: 'Bearer ' + access_token,
     },
-    success: function (response) {console.log("song queued")},
+    success: function (response) {
+      console.log("song queued");
+      $.ajax({
+        url: 'https://api.spotify.com/v1/me/player',
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + access_token,
+        },
+        success: function (data)
+        {
+          if(data.is_playing === false)
+          {
+            $.ajax({
+              url: 'https://api.spotify.com/v1/me/player/next',
+              method: 'POST',
+              headers: {
+                Authorization: 'Bearer ' + access_token,
+              },
+              success: function (result) {
+                console.log("Next in queue...");
+
+              },
+            });
+            
+
+          };
+        },
+
+      });
+
+    },
 
   });
 });
@@ -195,6 +240,8 @@ socket.on('showLyrics', data => {
   console.log(data);
   console.log("we're in");
 });
+
+
 
 const getUserDeviceInfo = () => {
   $.ajax({
