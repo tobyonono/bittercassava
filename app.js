@@ -162,7 +162,7 @@ app.get('/callback', function (req, res) {
               res.cookie('channelNum', 'channel1', {
                 maxAge: 30 * 24 * 3600 * 1000,
               });
-              res.redirect('/home');
+              res.redirect('/broadcaster');
             } else if (body.id === BROADCASTER_TWO) {
               res.cookie('broadcaster', true, {
                 maxAge: 30 * 24 * 3600 * 1000,

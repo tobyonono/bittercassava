@@ -189,6 +189,48 @@ socket.on('queueSong', data => {
     },
     success: function (response) {
       console.log("song queued");
+
+      $('.recentlyPlayed').prepend(
+        $('<li>', { class: 'header-list-item' }).append(
+          $('<div/>', { class: 'histContainer' }).append(
+            $('<div/>').append(
+              $('<img/>', { src: data.imgsrc, alt: '', width: 48, height: 48 }),
+            ),
+            $('<div/>', { class: 'metadata', id: data.trackID }).append(
+              $('<span/>', { class: 'artistName', text: data.artistName }),
+              $('<span/>', { class: 'songName', text: data.songName }),
+              $('<span/>', { class: 'albumName', text: data.albumName }),
+            ),
+            $('<div/>', { class: 'header-add-song-icon' }).append(
+              $('<img/>', {
+                class: 'addSong',
+                id: data.trackID,
+                src:
+                  'https://images.vexels.com/media/users/3/139162/isolated/preview/8b23fcb6b6c68d0f290b8dc5b5252214-cross-or-plus-icon-by-vexels.png',
+                alt: '',
+                width: 18,
+                height: 18,
+              }),
+            ),
+          ),
+        ),
+        $('<hr>'),
+      );
+      
+      $.ajax({
+        url: '/getLyrics',
+        method:'POST',
+        dataType: 'json',
+        contentType: "application/json",
+        data: JSON.stringify({ artist: data.artistName, song: data.songName }),
+
+        success: function(response) {
+          generateBlackout(response, data.artistName, data.songName);
+          console.log(response);
+          console.log(response.split(/\r\n|\r|\n/));
+        }
+      });
+
       $.ajax({
         url: 'https://api.spotify.com/v1/me/player',
         method: 'GET',
@@ -210,8 +252,6 @@ socket.on('queueSong', data => {
 
               },
             });
-            
-
           };
         },
 
