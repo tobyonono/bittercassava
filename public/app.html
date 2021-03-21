@@ -28,6 +28,7 @@
     <link href="/stylesheets/poetry.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
+    <div class="loader"><span>Open Spotify</span></div>
     <div class="contentContainer">
       <div class="modal-overlay closed" id="modal-overlay"></div>
       <div class="modal closed" id="modal">
@@ -214,5 +215,16 @@
   <script src ="scripts/iconNav.js" type="text/javascript"></script>
   <script type = "module" src="scripts/listener.js" ></script>
   <script type = "module" src="scripts/blackoutPoetry.js" ></script>
+  <script type="text/javascript">
+    $(window).load(function () {
+      document.getElementsByClassName('.loader');
+      if ($(this).hasClass('secondPhase')) {
+        $('.loader span').text('Stay Wholesome');
+      }
+
+      $('.loader').delay(4000).fadeOut();
+      $(this).toggleClass('secondPhase');
+    });
+  </script>
 
 </html>
